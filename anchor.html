@@ -1,0 +1,2432 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Anchor — Scripture for the Soul</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg-deep: #0f1419;
+    --bg: #1a1f26;
+    --bg-soft: #232932;
+    --bg-card: #2a313c;
+    --text: #e8e3d8;
+    --text-soft: #a8a294;
+    --text-faint: #6b6558;
+    --accent: #c9a876;
+    --accent-bright: #e6c896;
+    --accent-deep: #8b6f3e;
+    --warm: #d4866a;
+    --rule: #3a4150;
+    --display: 'Fraunces', serif;
+    --ui: 'Inter', sans-serif;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html, body {
+    background: var(--bg-deep);
+    color: var(--text);
+    font-family: var(--display);
+    font-size: 17px;
+    line-height: 1.65;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  body {
+    background-image:
+      radial-gradient(ellipse 80% 60% at 50% 0%, rgba(201, 168, 118, 0.08), transparent 70%),
+      radial-gradient(ellipse 60% 50% at 0% 100%, rgba(212, 134, 106, 0.05), transparent 70%);
+    background-attachment: fixed;
+  }
+
+  .container { max-width: 880px; margin: 0 auto; padding: 0 24px; }
+
+  header { padding: 56px 0 24px; text-align: center; }
+
+  .brand {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 56px;
+    letter-spacing: -0.03em;
+    color: var(--text);
+    line-height: 1;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .brand .ornament { color: var(--accent); font-style: italic; font-weight: 400; }
+
+  .tagline {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 19px;
+    color: var(--text-soft);
+    margin-top: 8px;
+  }
+
+  nav.tabs {
+    display: flex;
+    justify-content: center;
+    margin-top: 32px;
+    border-bottom: 1px solid var(--rule);
+    flex-wrap: wrap;
+  }
+
+  .tab {
+    background: none;
+    border: none;
+    padding: 14px 20px;
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-faint);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.25s;
+  }
+
+  .tab:hover { color: var(--text); }
+  .tab.active { color: var(--accent-bright); }
+
+  .tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 20px;
+    right: 20px;
+    height: 2px;
+    background: var(--accent);
+  }
+
+  .panel { display: none; padding: 32px 0 80px; }
+  .panel.active { display: block; animation: fadein 0.5s ease; }
+
+  @keyframes fadein {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .feeling-prompt { text-align: center; margin: 24px 0 32px; }
+
+  .prompt-question {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 28px;
+    color: var(--text-soft);
+    margin-bottom: 4px;
+  }
+
+  .prompt-sub {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    margin-bottom: 32px;
+  }
+
+  .feeling-input-wrap { position: relative; max-width: 540px; margin: 0 auto; }
+
+  .feeling-input {
+    width: 100%;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid var(--rule);
+    padding: 16px 0 18px;
+    font-family: var(--display);
+    font-size: 36px;
+    font-weight: 300;
+    color: var(--text);
+    text-align: center;
+    transition: border-color 0.3s;
+    font-variation-settings: "opsz" 144;
+  }
+
+  .feeling-input:focus { outline: none; border-bottom-color: var(--accent); }
+
+  .feeling-input::placeholder {
+    color: var(--text-faint);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .submit-btn {
+    background: var(--accent);
+    color: var(--bg-deep);
+    border: none;
+    padding: 14px 36px;
+    margin-top: 28px;
+    font-family: var(--ui);
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .submit-btn:hover { background: var(--accent-bright); transform: translateY(-1px); }
+
+  .quick-feelings { margin-top: 48px; text-align: center; }
+
+  .quick-label {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    margin-bottom: 16px;
+  }
+
+  .quick-grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px;
+    max-width: 700px;
+    margin: 0 auto;
+  }
+
+  .quick-chip {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    color: var(--text-soft);
+    padding: 8px 16px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.2s;
+    border-radius: 100px;
+  }
+
+  .quick-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    background: var(--bg-card);
+  }
+
+  .results-section { margin-top: 48px; display: none; }
+  .results-section.visible { display: block; animation: fadein 0.6s ease; }
+
+  .feeling-echo {
+    text-align: center;
+    margin-bottom: 40px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid var(--rule);
+  }
+
+  .feeling-echo .label {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+
+  .feeling-echo .word {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 42px;
+    color: var(--accent-bright);
+  }
+
+  .feeling-echo .acknowledge {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 17px;
+    color: var(--text-soft);
+    margin-top: 12px;
+    max-width: 540px;
+    margin: 12px auto 0;
+    line-height: 1.55;
+  }
+
+  .verses-section { margin-bottom: 48px; }
+
+  .section-heading {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 20px;
+    text-align: center;
+    position: relative;
+  }
+
+  .section-heading::before,
+  .section-heading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    width: 60px;
+    height: 1px;
+    background: var(--rule);
+  }
+
+  .section-heading::before { left: calc(50% - 160px); }
+  .section-heading::after { right: calc(50% - 160px); }
+
+  .verse-card {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    transition: all 0.25s;
+  }
+
+  .verse-card:hover { border-left-color: var(--accent-bright); background: var(--bg-card); }
+
+  .verse-card .ref {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .verse-card .text {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 14px;
+  }
+
+  .verse-card .why {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    padding-top: 14px;
+    border-top: 1px solid var(--rule);
+  }
+
+  .verse-card .why::before {
+    content: 'Why this verse';
+    font-family: var(--ui);
+    font-style: normal;
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    font-weight: 600;
+    display: block;
+    margin-bottom: 6px;
+  }
+
+  .save-verse-btn {
+    background: transparent;
+    border: 1px solid var(--rule);
+    color: var(--text-soft);
+    padding: 6px 14px;
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    cursor: pointer;
+    transition: all 0.25s;
+    margin-top: 12px;
+  }
+
+  .save-verse-btn:hover { border-color: var(--accent); color: var(--accent-bright); }
+  .save-verse-btn.saved { color: var(--accent-bright); border-color: var(--accent); }
+
+  .plan-block {
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--rule);
+    padding: 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .plan-block .day-num {
+    position: absolute;
+    top: -14px;
+    left: 24px;
+    background: var(--accent);
+    color: var(--bg-deep);
+    padding: 6px 14px;
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    font-weight: 700;
+  }
+
+  .plan-block .day-title {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 26px;
+    color: var(--accent-bright);
+    margin: 8px 0 16px;
+  }
+
+  .plan-block .day-section { margin-bottom: 18px; }
+
+  .plan-block .day-section-label {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    margin-bottom: 6px;
+    font-weight: 600;
+  }
+
+  .plan-block .day-section-content {
+    font-family: var(--display);
+    font-size: 17px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  .plan-block .day-section-content em { font-style: italic; color: var(--text-soft); }
+
+  .plan-block .check-day {
+    margin-top: 16px;
+    padding-top: 16px;
+    border-top: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .plan-block .check-day input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--accent);
+    cursor: pointer;
+  }
+
+  .plan-block .check-day label {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-faint);
+    cursor: pointer;
+  }
+
+  .prayer-prompt {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--warm);
+    padding: 28px 32px;
+    margin-top: 16px;
+  }
+
+  .prayer-prompt .label {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--warm);
+    margin-bottom: 12px;
+    font-weight: 600;
+  }
+
+  .prayer-prompt .text {
+    font-family: var(--display);
+    font-style: italic;
+    font-weight: 300;
+    font-size: 21px;
+    line-height: 1.55;
+    color: var(--text);
+  }
+
+  .save-bar {
+    margin-top: 32px;
+    text-align: center;
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .save-bar button {
+    background: transparent;
+    color: var(--text);
+    border: 1px solid var(--rule);
+    padding: 12px 24px;
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    cursor: pointer;
+    transition: all 0.25s;
+  }
+
+  .save-bar button:hover { border-color: var(--accent); color: var(--accent-bright); }
+
+  .history-item {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.25s;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .history-item:hover { border-color: var(--accent); background: var(--bg-card); }
+
+  .history-item .word {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent-bright);
+  }
+
+  .history-item .meta {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-faint);
+    margin-top: 4px;
+  }
+
+  .history-item .delete {
+    background: none;
+    border: none;
+    color: var(--text-faint);
+    cursor: pointer;
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    padding: 4px 8px;
+  }
+
+  .history-item .delete:hover { color: var(--warm); }
+
+  .saved-verse {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--accent);
+    padding: 20px 24px;
+    margin-bottom: 12px;
+  }
+
+  .saved-verse .ref {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 8px;
+  }
+
+  .saved-verse .text {
+    font-family: var(--display);
+    font-size: 18px;
+    line-height: 1.55;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+
+  .saved-verse .meta {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.22em;
+    color: var(--text-faint);
+    display: flex;
+    justify-content: space-between;
+    margin-top: 8px;
+  }
+
+  .empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--text-faint);
+  }
+
+  .browse-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  .browse-chip {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    color: var(--text-soft);
+    padding: 14px 16px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.2s;
+    text-align: center;
+  }
+
+  .browse-chip:hover {
+    border-color: var(--accent);
+    color: var(--accent-bright);
+    background: var(--bg-card);
+    transform: translateY(-1px);
+  }
+
+  /* STUDY BREAKDOWN */
+  .study-block {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    padding: 28px 32px;
+    margin-bottom: 16px;
+    position: relative;
+  }
+
+  .study-block.feature {
+    border-left: 3px solid var(--accent);
+  }
+
+  .study-block.warm {
+    border-left: 3px solid var(--warm);
+  }
+
+  .study-block .block-label {
+    font-family: var(--ui);
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .study-block.warm .block-label { color: var(--warm); }
+
+  .study-block .block-title {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 24px;
+    color: var(--accent-bright);
+    margin-bottom: 12px;
+  }
+
+  .study-block .block-content {
+    font-family: var(--display);
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+  }
+
+  .study-block .block-content p { margin-bottom: 12px; }
+  .study-block .block-content p:last-child { margin-bottom: 0; }
+
+  .study-block .block-content em {
+    font-style: italic;
+    color: var(--accent-bright);
+  }
+
+  .study-block .block-content strong {
+    color: var(--accent-bright);
+    font-weight: 500;
+  }
+
+  .verse-banner {
+    background: linear-gradient(135deg, var(--bg-soft) 0%, var(--bg-card) 100%);
+    border: 1px solid var(--rule);
+    padding: 32px;
+    margin-bottom: 24px;
+    text-align: center;
+  }
+
+  .verse-banner .ref {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--accent);
+    font-weight: 600;
+    margin-bottom: 12px;
+  }
+
+  .verse-banner .text {
+    font-family: var(--display);
+    font-weight: 300;
+    font-size: 24px;
+    line-height: 1.55;
+    color: var(--text);
+    font-style: italic;
+  }
+
+  .verse-banner .translation-tag {
+    font-family: var(--ui);
+    font-size: 9px;
+    text-transform: uppercase;
+    letter-spacing: 0.25em;
+    color: var(--text-faint);
+    margin-top: 12px;
+  }
+
+  /* GREEK/HEBREW WORD */
+  .word-entry {
+    background: var(--bg-deep);
+    border: 1px solid var(--rule);
+    padding: 16px 20px;
+    margin-bottom: 12px;
+  }
+
+  .word-entry .original {
+    font-family: var(--display);
+    font-size: 22px;
+    color: var(--accent-bright);
+    margin-bottom: 4px;
+  }
+
+  .word-entry .translit {
+    font-family: var(--ui);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.2em;
+    color: var(--text-faint);
+    margin-bottom: 10px;
+  }
+
+  .word-entry .meaning {
+    font-family: var(--display);
+    font-size: 16px;
+    line-height: 1.65;
+    color: var(--text);
+  }
+
+  /* CROSS REFS */
+  .xref-list {
+    list-style: none;
+  }
+
+  .xref-list li {
+    padding: 12px 0;
+    border-bottom: 1px dotted var(--rule);
+    font-family: var(--display);
+    font-size: 16px;
+    line-height: 1.6;
+  }
+
+  .xref-list li:last-child { border-bottom: none; }
+
+  .xref-list .ref {
+    color: var(--accent-bright);
+    font-weight: 500;
+    font-style: italic;
+    margin-right: 10px;
+  }
+
+  .xref-list .note {
+    color: var(--text-soft);
+    font-style: italic;
+    font-size: 15px;
+  }
+
+  /* NOT FOUND */
+  .not-found {
+    background: var(--bg-soft);
+    border: 1px solid var(--rule);
+    border-left: 3px solid var(--warm);
+    padding: 28px 32px;
+    text-align: center;
+  }
+
+  .not-found h3 {
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 22px;
+    color: var(--accent-bright);
+    margin-bottom: 12px;
+  }
+
+  .not-found p {
+    font-family: var(--display);
+    font-size: 16px;
+    color: var(--text-soft);
+    line-height: 1.6;
+    margin-bottom: 16px;
+  }
+
+  .not-found .available-list {
+    text-align: left;
+    max-width: 400px;
+    margin: 16px auto 0;
+    background: var(--bg-deep);
+    padding: 16px;
+    border: 1px solid var(--rule);
+    font-family: var(--ui);
+    font-size: 13px;
+    color: var(--text-soft);
+    max-height: 240px;
+    overflow-y: auto;
+  }
+
+  ::-webkit-scrollbar { width: 8px; }
+  ::-webkit-scrollbar-track { background: var(--bg-deep); }
+  ::-webkit-scrollbar-thumb { background: var(--rule); border-radius: 4px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--accent-deep); }
+
+  footer {
+    text-align: center;
+    padding: 32px 0;
+    border-top: 1px solid var(--rule);
+    margin-top: 40px;
+    font-family: var(--display);
+    font-style: italic;
+    font-size: 14px;
+    color: var(--text-faint);
+  }
+
+  @media (max-width: 600px) {
+    .brand { font-size: 42px; }
+    .feeling-input { font-size: 28px; }
+    .verse-card { padding: 22px 24px; }
+    .verse-card .text { font-size: 19px; }
+    .plan-block { padding: 24px 22px; }
+    .feeling-echo .word { font-size: 32px; }
+    .section-heading::before,
+    .section-heading::after { display: none; }
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+  <header>
+    <div class="brand">Anchor<span class="ornament">.</span></div>
+    <div class="tagline">scripture for whatever you're carrying</div>
+  </header>
+
+  <nav class="tabs">
+    <button class="tab active" data-tab="home">Now</button>
+    <button class="tab" data-tab="browse">Browse</button>
+    <button class="tab" data-tab="study">Study</button>
+    <button class="tab" data-tab="history">History</button>
+    <button class="tab" data-tab="saved">Saved</button>
+  </nav>
+
+  <section class="panel active" id="panel-home">
+    <div class="feeling-prompt">
+      <div class="prompt-question">How are you, really?</div>
+      <div class="prompt-sub">One word. Be honest.</div>
+    </div>
+
+    <div class="feeling-input-wrap">
+      <input type="text" class="feeling-input" id="feelingInput" placeholder="anxious" maxlength="40" autocomplete="off" />
+      <div style="text-align: center;">
+        <button class="submit-btn" id="submitBtn">Find Scripture</button>
+      </div>
+    </div>
+
+    <div class="quick-feelings">
+      <div class="quick-label">Or pick one</div>
+      <div class="quick-grid" id="quickGrid"></div>
+    </div>
+
+    <div class="results-section" id="resultsSection"></div>
+  </section>
+
+  <section class="panel" id="panel-browse">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div class="prompt-question">All feelings</div>
+      <div class="prompt-sub">Browse the full library</div>
+    </div>
+    <div class="browse-grid" id="browseGrid"></div>
+  </section>
+
+  <section class="panel" id="panel-study">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div class="prompt-question">Break down a verse</div>
+      <div class="prompt-sub">Theology, context, language</div>
+    </div>
+
+    <div class="feeling-input-wrap">
+      <input type="text" class="feeling-input" id="verseInput" placeholder="John 3:16" maxlength="60" autocomplete="off" />
+      <div style="text-align: center;">
+        <button class="submit-btn" id="studyBtn">Study This Verse</button>
+      </div>
+    </div>
+
+    <div class="quick-feelings">
+      <div class="quick-label">Or pick a passage</div>
+      <div class="browse-grid" id="verseGrid" style="margin-top: 16px;"></div>
+    </div>
+
+    <div class="results-section" id="studyResults"></div>
+  </section>
+
+  <section class="panel" id="panel-history">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div class="prompt-question">What you've been carrying</div>
+      <div class="prompt-sub">Past entries</div>
+    </div>
+    <div id="historyList">
+      <div class="empty-state">No entries yet. Tell Anchor how you're feeling on the Now tab.</div>
+    </div>
+  </section>
+
+  <section class="panel" id="panel-saved">
+    <div style="text-align: center; margin-bottom: 32px;">
+      <div class="prompt-question">Verses you've kept</div>
+      <div class="prompt-sub">Anchored truths</div>
+    </div>
+    <div id="savedList">
+      <div class="empty-state">No saved verses yet. Save any verse from your generated results.</div>
+    </div>
+  </section>
+
+  <footer>
+    <span style="color: var(--accent);">❦</span> &nbsp; "Cast all your anxiety on him, because he cares for you." &nbsp; <span style="color: var(--accent);">❦</span>
+  </footer>
+</div>
+
+<script>
+// ============================================================
+// FEELINGS LIBRARY
+// Each entry: acknowledge, 4 verses (with why), 7-day plan, prayer
+// All scripture text is KJV (public domain).
+// ============================================================
+const LIBRARY = {
+  anxious: {
+    acknowledge: "Anxiety is the mind running ahead to a danger that hasn't come — and it's exhausting. Scripture meets you not with a scold but with the steady invitation to bring the weight here.",
+    verses: [
+      { ref: "Philippians 4:6-7", text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.", why: "It doesn't say 'feel better.' It gives you a transaction: trade the worry for prayer with thanksgiving. Peace is the result, not the entry fee." },
+      { ref: "1 Peter 5:6-7", text: "Humble yourselves therefore under the mighty hand of God, that he may exalt you in due time: Casting all your care upon him; for he careth for you.", why: "The reason you can cast it is that he cares. Anxiety often hides a quiet doubt that he does." },
+      { ref: "Psalm 94:19", text: "In the multitude of my thoughts within me thy comforts delight my soul.", why: "When the thoughts won't stop multiplying, his comforts can match them — one for one." },
+      { ref: "Matthew 6:34", text: "Take therefore no thought for the morrow: for the morrow shall take thought for the things of itself. Sufficient unto the day is the evil thereof.", why: "Jesus names the trick of anxiety: it borrows trouble from a tomorrow that may never come." }
+    ],
+    plan: [
+      { title: "Name what you're afraid of", passage: "Psalm 55:1-8", focus: "David doesn't sanitize his fear. Notice how specifically he names it.", practice: "Write down — on paper — the three things you're most afraid will happen. Don't fix them yet. Just see them." },
+      { title: "Bring the list to him", passage: "Philippians 4:4-9", focus: "Read slowly. The 'requests' Paul means are specific, not vague.", practice: "Take yesterday's list. Pray through each item by name. Then thank him for one thing — anything — that's true right now." },
+      { title: "Cast, don't carry", passage: "1 Peter 5:5-11", focus: "'Casting' is active. It's a one-time motion, not slow leaking.", practice: "Picture yourself handing the heaviest item on your list to him. Say out loud: 'This is yours now.' If it comes back, hand it again." },
+      { title: "What you actually have today", passage: "Matthew 6:25-34", focus: "Jesus argues from lesser to greater — birds, lilies, you.", practice: "Make a list of what you actually have right now (not what's missing). Food. A roof. A breath. Read the list aloud." },
+      { title: "The God who doesn't sleep", passage: "Psalm 121", focus: "Eight verses of one promise: he is awake when you can't be.", practice: "Read it three times. Once to yourself. Once aloud. Once whispered." },
+      { title: "Quiet enough to hear", passage: "Psalm 46", focus: "'Be still' isn't passive — it's a command in the middle of chaos.", practice: "Sit five minutes in silence. No phone. When a worry shows up, notice it and return to the verse: 'Be still and know.'" },
+      { title: "A peace not from this world", passage: "John 14:25-31", focus: "Jesus gives peace differently than the world does — not by removing the trouble, but by being present in it.", practice: "Identify one situation you've been trying to control. Name what surrender looks like in it. Take the first step." }
+    ],
+    prayer: "Father, I'm carrying more than I can hold and my mind won't stop. I bring this weight to you — not to dress it up, but to set it down. Quiet the running thoughts. Help me trust that you see what's coming and that you're already there. I need your peace, not just relief. Amen."
+  },
+
+  tired: {
+    acknowledge: "Tiredness isn't always laziness or weakness — sometimes it's the honest signal of a soul that's been carrying too much for too long. Jesus knew it. He invites it.",
+    verses: [
+      { ref: "Matthew 11:28-30", text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls. For my yoke is easy, and my burden is light.", why: "He doesn't say 'work harder.' He says 'come.' And the rest he gives is for the soul, not just the body." },
+      { ref: "Isaiah 40:29-31", text: "He giveth power to the faint; and to them that have no might he increaseth strength. Even the youths shall faint and be weary, and the young men shall utterly fall: But they that wait upon the LORD shall renew their strength.", why: "Strength isn't manufactured — it's renewed in those who wait. Waiting itself is the work." },
+      { ref: "Psalm 23:1-3", text: "The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul.", why: "He makes you lie down. Sometimes rest isn't optional — it's pastoral care." },
+      { ref: "Mark 6:31", text: "And he said unto them, Come ye yourselves apart into a desert place, and rest a while: for there were many coming and going, and they had no leisure so much as to eat.", why: "Even the disciples — at the height of the work — were told to stop. Jesus prescribed rest as ministry strategy." }
+    ],
+    plan: [
+      { title: "Admit the tiredness", passage: "1 Kings 19:1-9", focus: "Elijah, after his greatest victory, was wrecked. God's first response wasn't a sermon — it was food and sleep.", practice: "Eat something nourishing. Go to bed an hour earlier than normal. That's it. That's the assignment." },
+      { title: "Come, don't perform", passage: "Matthew 11:28-30", focus: "The yoke is easy because he's pulling with you, not just watching.", practice: "Sit somewhere quiet. Tell him out loud what you're tired of. Don't pretty it up." },
+      { title: "Wait, don't grind", passage: "Isaiah 40:27-31", focus: "The renewal is for those who wait — not those who hustle harder.", practice: "Pick one thing you've been forcing through exhaustion. Let yourself not do it today. Notice what fear comes up." },
+      { title: "Restored, not just rested", passage: "Psalm 23", focus: "The shepherd doesn't just give sleep — he restores the soul. Different.", practice: "Take a walk without a podcast or music. Just walk. Let your soul catch up with your body." },
+      { title: "Boundaries are biblical", passage: "Mark 1:35-39", focus: "Jesus left the crowds — even when they wanted him — to be alone with the Father.", practice: "Identify one 'yes' you've been saying out of guilt. Practice saying no this week. Even if it feels selfish." },
+      { title: "What you're really hungry for", passage: "John 4:5-14", focus: "Jesus was tired at the well — and the conversation that followed showed what real refreshment looks like.", practice: "Ask: what am I trying to get from work, performance, or people that only Christ can actually give? Write it down." },
+      { title: "The long way through", passage: "Hebrews 4:1-11", focus: "There's a Sabbath rest still being offered. Not just a day — a posture.", practice: "Plan a true day of rest this week. Twenty-four hours. No work, no errands. Worship, eat, sleep, walk." }
+    ],
+    prayer: "Lord, I'm tired in a way that sleep doesn't fix. I've been pushing when I should have stopped. Teach me your easy yoke. Restore my soul, not just my schedule. I'm coming. Amen."
+  },
+
+  angry: {
+    acknowledge: "Anger isn't always sin — sometimes it's the right response to wrongness. The question isn't whether you feel it but where you take it before it takes you somewhere you can't come back from.",
+    verses: [
+      { ref: "Ephesians 4:26-27", text: "Be ye angry, and sin not: let not the sun go down upon your wrath: Neither give place to the devil.", why: "Paul doesn't forbid anger — he sets a clock on it. Unprocessed anger is where the enemy sets up shop." },
+      { ref: "Psalm 4:4", text: "Stand in awe, and sin not: commune with your own heart upon your bed, and be still.", why: "Before you act, lie still and search your own heart. The first sermon is to yourself." },
+      { ref: "James 1:19-20", text: "Wherefore, my beloved brethren, let every man be swift to hear, slow to speak, slow to wrath: For the wrath of man worketh not the righteousness of God.", why: "Your anger doesn't accomplish what God's righteousness can. That's a gut-check." },
+      { ref: "Proverbs 15:1", text: "A soft answer turneth away wrath: but grievous words stir up anger.", why: "The escalation always feels justified in the moment. The de-escalation is what wisdom looks like." }
+    ],
+    plan: [
+      { title: "Name the real thing", passage: "Psalm 4", focus: "Anger is often a surface emotion. Underneath: hurt, fear, betrayal, or shame.", practice: "Write what happened. Then write: 'Underneath the anger I am actually feeling ___.' Be honest." },
+      { title: "Don't take revenge", passage: "Romans 12:17-21", focus: "Vengeance isn't released — it's transferred. To him.", practice: "If you've been imagining what you'll say or do, stop and pray for the person instead. Even if you don't mean it yet." },
+      { title: "Slow speech, slow wrath", passage: "James 1:19-27", focus: "James pairs swift listening with slow speaking. Both are training.", practice: "In every conversation today, count to three before you respond. Notice how often you would have spoken too fast." },
+      { title: "What you actually want", passage: "James 4:1-3", focus: "Anger usually points at a desire. James asks: what do you want that you're not getting?", practice: "Identify the desire under the anger. Is it for respect? Justice? Control? Bring that desire honestly to God." },
+      { title: "Forgive — not because they deserve it", passage: "Matthew 18:21-35", focus: "The unforgiving servant didn't see what he had been forgiven of.", practice: "Make a short list of what God has forgiven in you. Read it before deciding what the other person owes." },
+      { title: "Soft answer", passage: "Proverbs 15:1-18", focus: "The whole chapter is a portrait of wisdom in conflict.", practice: "Have one conversation today where you respond softer than feels natural. Note what happens — in them, and in you." },
+      { title: "From wrath to blessing", passage: "Romans 12:9-21", focus: "The Christian life is overcoming evil with good — not just refraining from evil.", practice: "Bless the person you've been angry at. A prayer. A text. A genuine act. Choose one." }
+    ],
+    prayer: "God, I'm angry, and some of it is righteous and some of it isn't. Help me tell the difference. Don't let me sin in this. Search my heart. Show me what's underneath. I want your righteousness, not my revenge. Amen."
+  },
+
+  lost: {
+    acknowledge: "Being lost isn't always a wrong turn — sometimes it's the silence between chapters, when the old map doesn't work and the new one hasn't been drawn yet. He doesn't lose his sheep.",
+    verses: [
+      { ref: "Psalm 32:8", text: "I will instruct thee and teach thee in the way which thou shalt go: I will guide thee with mine eye.", why: "He guides with his eye — close enough to see where you're looking. You're not navigating alone." },
+      { ref: "Proverbs 3:5-6", text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.", why: "Direction isn't given to those who have it figured out — it's given to those who acknowledge they don't." },
+      { ref: "Luke 15:4-6", text: "What man of you, having an hundred sheep, if he lose one of them, doth not leave the ninety and nine in the wilderness, and go after that which is lost, until he find it?", why: "He doesn't wait for you to find your way back. He comes looking." },
+      { ref: "Isaiah 30:21", text: "And thine ears shall hear a word behind thee, saying, This is the way, walk ye in it, when ye turn to the right hand, and when ye turn to the left.", why: "The voice comes from behind — meaning he's already walked where you're going." }
+    ],
+    plan: [
+      { title: "Stop walking", passage: "Psalm 46:10", focus: "Sometimes lost means you need to stop, not push harder.", practice: "Don't make any major decisions today. Sit. Pray. Wait." },
+      { title: "Where you actually are", passage: "Psalm 139:1-12", focus: "He knows your location. The question is whether you do.", practice: "Write three sentences: where am I in life right now, honestly? Don't dress it up." },
+      { title: "Trust before clarity", passage: "Proverbs 3:1-12", focus: "Direction follows trust, not the other way around.", practice: "Identify one decision you're trying to make. Surrender it for 24 hours. Don't decide today." },
+      { title: "The voice behind you", passage: "Isaiah 30:15-21", focus: "His guidance comes through quietness and confidence.", practice: "Spend 10 minutes in silence. Ask: 'Lord, what are you saying?' Listen, don't talk." },
+      { title: "He came looking", passage: "Luke 15:1-7", focus: "You don't have to find your way back to be found.", practice: "Read the parable aloud. Replace 'sheep' with your name. Sit with that." },
+      { title: "Light enough for now", passage: "Psalm 119:105", focus: "A lamp shows the next step, not the whole road.", practice: "Don't try to plan the next year. Just identify the next right step. Take it." },
+      { title: "Walk by faith", passage: "Hebrews 11:8-12", focus: "Abraham went out, not knowing where he was going. Faith is movement without a map.", practice: "Take one small step toward what feels right — even without certainty. Faith is built by walking." }
+    ],
+    prayer: "Lord, I don't know where I am or where I'm going. The map I had isn't working. I'm not going to pretend I have it figured out. Come find me. Direct my paths. I'll trust you for the next step, even if I can't see the whole road. Amen."
+  },
+
+  lonely: {
+    acknowledge: "Loneliness can ache even in a crowd. It's the absence of being known, not just the absence of people. Scripture doesn't tell you to feel less alone — it tells you that you aren't.",
+    verses: [
+      { ref: "Psalm 139:7-10", text: "Whither shall I go from thy spirit? or whither shall I flee from thy presence? If I ascend up into heaven, thou art there: if I make my bed in hell, behold, thou art there. If I take the wings of the morning, and dwell in the uttermost parts of the sea; Even there shall thy hand lead me.", why: "There is no place loneliness can take you that he isn't already." },
+      { ref: "Hebrews 13:5-6", text: "Let your conversation be without covetousness; and be content with such things as ye have: for he hath said, I will never leave thee, nor forsake thee. So that we may boldly say, The Lord is my helper, and I will not fear.", why: "The triple negative in Greek is the strongest possible 'I will never, never, never leave.' This is not a maybe." },
+      { ref: "Psalm 27:10", text: "When my father and my mother forsake me, then the LORD will take me up.", why: "Even the deepest human absence isn't the end of the story. He picks up where they leave off." },
+      { ref: "Matthew 28:20", text: "Teaching them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, even unto the end of the world. Amen.", why: "The last words of Jesus in Matthew. Not 'good luck.' Not 'I'll check in.' 'I am with you.'" }
+    ],
+    plan: [
+      { title: "Honest before God", passage: "Psalm 25", focus: "David alone, lonely, in trouble — and not afraid to say so.", practice: "Tell God exactly how lonely you feel. Out loud. He can take it." },
+      { title: "He knows where you are", passage: "Psalm 139:1-18", focus: "He doesn't lose track of you, even when you feel invisible.", practice: "Read it slowly. Underline every line that says 'thou' or 'thee.' Notice how present he is in every verse." },
+      { title: "Never forsaken", passage: "Hebrews 13:1-8", focus: "The promise to never leave is grounded in his unchanging character.", practice: "Memorize Hebrews 13:5b. Repeat it three times today, especially when the loneliness hits." },
+      { title: "The body of Christ", passage: "1 Corinthians 12:12-27", focus: "You were designed for community. Isolation isn't God's plan for you.", practice: "Reach out to one person — a text, a call. Don't wait to feel like it. Move first." },
+      { title: "Friend of sinners", passage: "John 15:9-17", focus: "Jesus calls you friend. Not servant. Not project. Friend.", practice: "Sit with that word: friend. What does it mean that the Son of God uses it for you?" },
+      { title: "He sets the lonely in families", passage: "Psalm 68:4-6", focus: "God's heart for the isolated is to bring them in.", practice: "If you don't have a faith community, take the first step toward finding one. A church visit. A small group. One step." },
+      { title: "With you always", passage: "Matthew 28:16-20", focus: "The Great Commission ends with the great companionship.", practice: "When you go to bed tonight, say: 'You are with me here. Right now. I'm not alone.' Believe it as much as you can." }
+    ],
+    prayer: "Lord, I feel alone, even when I'm not by myself. I feel unseen. Remind me that you see me — that you have always seen me. Bring people into my life who know me. And until they come, be with me in the quiet. Amen."
+  },
+
+  grateful: {
+    acknowledge: "Gratitude is the soul's most truthful posture — seeing what is rather than what isn't. It's a gift to feel it, and a gift to give it back.",
+    verses: [
+      { ref: "Psalm 103:1-5", text: "Bless the LORD, O my soul: and all that is within me, bless his holy name. Bless the LORD, O my soul, and forget not all his benefits: Who forgiveth all thine iniquities; who healeth all thy diseases; Who redeemeth thy life from destruction; who crowneth thee with lovingkindness and tender mercies.", why: "David preaches to himself: 'Don't forget.' Gratitude has to be remembered, not just felt." },
+      { ref: "1 Thessalonians 5:16-18", text: "Rejoice evermore. Pray without ceasing. In every thing give thanks: for this is the will of God in Christ Jesus concerning you.", why: "'In every thing' — not 'for every thing.' Even in hard things, there is something to thank him for." },
+      { ref: "Philippians 4:8", text: "Whatsoever things are true, whatsoever things are honest, whatsoever things are just, whatsoever things are pure, whatsoever things are lovely, whatsoever things are of good report; if there be any virtue, and if there be any praise, think on these things.", why: "Gratitude trains the eye. What you look for, you find more of." },
+      { ref: "Psalm 100:4", text: "Enter into his gates with thanksgiving, and into his courts with praise: be thankful unto him, and bless his name.", why: "Thanksgiving is the doorway. The closer you want to get, the more you thank." }
+    ],
+    plan: [
+      { title: "Bless the Lord, O my soul", passage: "Psalm 103", focus: "David doesn't wait to feel grateful — he commands his soul.", practice: "List five 'benefits' from your own life. Read the psalm aloud, inserting them." },
+      { title: "Every good gift", passage: "James 1:16-18", focus: "All good comes from one Father.", practice: "List ten ordinary things you usually take for granted. Thank him for each by name." },
+      { title: "In everything, thanks", passage: "1 Thessalonians 5:12-22", focus: "Gratitude isn't a mood — it's a will of God.", practice: "Identify one hard thing in your life. Find one thing in it to thank him for. Even one." },
+      { title: "Remember", passage: "Deuteronomy 8", focus: "Forgetting what God has done is the root of much spiritual drift.", practice: "Write a 'remembrance list' of three big things God has done in your life. Read it weekly." },
+      { title: "Tell someone", passage: "Psalm 107:1-3", focus: "The redeemed are commanded to say so.", practice: "Tell one person today something you're thankful for in their life. Specific. Out loud or in a message." },
+      { title: "Whatsoever is lovely", passage: "Philippians 4:4-9", focus: "What you set your mind on shapes your soul.", practice: "Take a 10-minute walk and look only for beauty. Note what you notice." },
+      { title: "Worship", passage: "Revelation 4-5", focus: "Heaven's atmosphere is gratitude given full voice.", practice: "Sing one hymn or worship song today, even if you're alone. Let your gratitude have a sound." }
+    ],
+    prayer: "Father, thank you. For this breath, this body, this day, this Savior. I am surrounded by gifts I usually don't see. Open my eyes. Train my heart. Let my life be a long thanksgiving. Amen."
+  },
+
+  overwhelmed: {
+    acknowledge: "Overwhelm is the brain's signal that the load has outgrown the structure. It's not weakness — it's data. And the way through isn't more effort. It's a different posture.",
+    verses: [
+      { ref: "Psalm 61:1-4", text: "Hear my cry, O God; attend unto my prayer. From the end of the earth will I cry unto thee, when my heart is overwhelmed: lead me to the rock that is higher than I.", why: "David names the feeling without shame. And asks for one specific thing: to be led to higher ground." },
+      { ref: "Matthew 6:33-34", text: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you. Take therefore no thought for the morrow.", why: "Overwhelm comes from carrying too many days at once. Jesus narrows the assignment to today." },
+      { ref: "Exodus 18:17-18", text: "And Moses' father in law said unto him, The thing that thou doest is not good. Thou wilt surely wear away, both thou, and this people that is with thee: for this thing is too heavy for thee; thou art not able to perform it thyself alone.", why: "Sometimes the overwhelm is God's way of telling you the structure is wrong, not that you're failing in it." },
+      { ref: "2 Corinthians 12:9", text: "And he said unto me, My grace is sufficient for thee: for my strength is made perfect in weakness.", why: "Weakness is where his strength shows up best. Overwhelm puts you exactly where grace works." }
+    ],
+    plan: [
+      { title: "Cry out", passage: "Psalm 61", focus: "The first move isn't to organize — it's to cry out.", practice: "Pray honestly. 'God, this is too much. I don't know where to start.' Don't try to fix it yet." },
+      { title: "Just today", passage: "Matthew 6:25-34", focus: "Tomorrow's worries are not in today's grace allotment.", practice: "Write down only what must be done today. Cross out the rest. They'll wait." },
+      { title: "Ask for help", passage: "Exodus 18:13-27", focus: "Moses, the greatest leader in the OT, was told to delegate.", practice: "Identify one thing you're trying to do alone that someone else could help with. Ask them today." },
+      { title: "One thing", passage: "Luke 10:38-42", focus: "Martha was 'cumbered about with much serving.' Mary chose one thing.", practice: "Identify the 'one thing needful' for you right now. Do that. Let the rest go for the moment." },
+      { title: "Strength in weakness", passage: "2 Corinthians 12:1-10", focus: "Paul didn't get the thorn removed. He got grace sufficient.", practice: "Stop praying for the load to be lighter. Start praying for grace to be enough. Notice the difference." },
+      { title: "He carries us", passage: "Isaiah 46:3-4", focus: "He has carried you since you were born. He will carry you to old age.", practice: "Picture him carrying the part of your load that doesn't have to be yours. What's left? That's what's actually yours." },
+      { title: "Rest as resistance", passage: "Hebrews 4:9-13", focus: "There remains a Sabbath rest. Practicing it is an act of faith.", practice: "Schedule one block of time this week — at least three hours — that is not for productivity. Honor it." }
+    ],
+    prayer: "Father, I am overwhelmed. The list is longer than the day. I am trying to do what only you can do. Lead me to the rock that is higher than I. Show me what's actually mine to carry, and let me put down the rest. Your grace is enough. Help me believe it. Amen."
+  },
+
+  afraid: {
+    acknowledge: "Fear is honest — it tells you something matters and feels uncertain. The Bible doesn't shame fear. It just keeps placing a Person between you and what you fear.",
+    verses: [
+      { ref: "Isaiah 41:10", text: "Fear thou not; for I am with thee: be not dismayed; for I am thy God: I will strengthen thee; yea, I will help thee; yea, I will uphold thee with the right hand of my righteousness.", why: "Five promises stacked on each other. Notice every one is about him, not you." },
+      { ref: "Psalm 27:1", text: "The LORD is my light and my salvation; whom shall I fear? the LORD is the strength of my life; of whom shall I be afraid?", why: "Fear shrinks when you ask the right question: who is bigger than what scares me?" },
+      { ref: "2 Timothy 1:7", text: "For God hath not given us the spirit of fear; but of power, and of love, and of a sound mind.", why: "The Spirit you actually have is opposite of the one fear pretends you have." },
+      { ref: "Joshua 1:9", text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.", why: "Joshua's about to lead a nation he isn't ready for. Courage is commanded — and given." }
+    ],
+    plan: [
+      { title: "Name the fear", passage: "Psalm 56", focus: "David, surrounded by enemies, says: 'What time I am afraid, I will trust in thee.'", practice: "Write down what you're afraid of. Specific. Not 'everything.' Name the actual thing." },
+      { title: "Who is with you", passage: "Isaiah 41:8-13", focus: "The promise isn't 'nothing bad will happen.' It's 'I am with thee.'", practice: "Read Isaiah 41:10 ten times. Aloud. Slow. Let it land." },
+      { title: "Bigger than the fear", passage: "Psalm 27", focus: "David doesn't deny the danger — he sets it next to who God is.", practice: "Make two columns: what I'm afraid of / who God is. Fill both. Look at them together." },
+      { title: "Not given a spirit of fear", passage: "2 Timothy 1:1-12", focus: "Paul writes from prison, telling Timothy not to be ashamed or afraid.", practice: "When fear shows up, say: 'This is not from God. I have power, love, and a sound mind.' Repeat until you believe it." },
+      { title: "Perfect love casts out fear", passage: "1 John 4:14-21", focus: "The opposite of fear is being deeply loved.", practice: "Sit five minutes meditating on this: 'I am loved by God right now, in this fear.' Let it dissolve some of the dread." },
+      { title: "Courage is commanded", passage: "Joshua 1", focus: "Three times: 'be strong and of a good courage.' Because Joshua needed to hear it three times.", practice: "Take one small action today that fear has been telling you not to take. Just one." },
+      { title: "Even if", passage: "Daniel 3:16-18", focus: "Shadrach, Meshach, Abednego: 'Our God is able to deliver. But if not — we will not bow.'", practice: "Identify the worst thing you're afraid will happen. Say: 'Even if that happens, God is still good and I will trust him.' Mean it as much as you can." }
+    ],
+    prayer: "Lord, I'm afraid. I name it because hiding it doesn't make it smaller. You said you are with me — help me believe it more than I believe the fear. Be bigger than what scares me. Walk into this with me. Amen."
+  },
+
+  doubting: {
+    acknowledge: "Doubt isn't the opposite of faith — it's often where faith grows. Honest questions, brought into the open, have always been welcome at God's table.",
+    verses: [
+      { ref: "Mark 9:24", text: "And straightway the father of the child cried out, and said with tears, Lord, I believe; help thou mine unbelief.", why: "The most honest prayer in the gospels. Belief and unbelief at the same time, brought to Jesus together." },
+      { ref: "Jude 1:22", text: "And of some have compassion, making a difference.", why: "The KJV is brief; modern translations: 'Have mercy on those who doubt.' God's heart toward the doubter is not impatience — it's compassion." },
+      { ref: "John 20:26-29", text: "Then saith he to Thomas, Reach hither thy finger, and behold my hands; and reach hither thy hand, and thrust it into my side: and be not faithless, but believing... blessed are they that have not seen, and yet have believed.", why: "Jesus didn't scold Thomas. He showed him the wounds. He meets doubt with evidence and presence." },
+      { ref: "Psalm 73:21-26", text: "Thus my heart was grieved, and I was pricked in my reins. So foolish was I, and ignorant: I was as a beast before thee. Nevertheless I am continually with thee... Whom have I in heaven but thee? and there is none upon earth that I desire beside thee.", why: "Asaph describes losing his footing — and finding it again. The way through doubt isn't around it." }
+    ],
+    plan: [
+      { title: "Bring it into the light", passage: "Psalm 73", focus: "Asaph almost lost his faith. Then he went into God's sanctuary.", practice: "Write down your honest doubt. Specific. Don't worry if it sounds blasphemous. Hidden doubt is heavier than spoken doubt." },
+      { title: "Belief and unbelief together", passage: "Mark 9:14-29", focus: "The father in this story is a model. He brings both to Jesus.", practice: "Pray Mark 9:24 today: 'Lord, I believe; help thou mine unbelief.' Repeat as needed." },
+      { title: "He shows the wounds", passage: "John 20:24-31", focus: "Jesus didn't shame Thomas for needing more. He gave him more.", practice: "Ask God for one piece of evidence — not a sign, but a clearer view of who he is. Then watch this week." },
+      { title: "What you actually know", passage: "1 John 5:11-13", focus: "John writes 'that ye may know.' Faith stands on what's known.", practice: "List five things you do still believe. Five things about God you're sure of. Don't list what you doubt — list what holds." },
+      { title: "Wrestle, don't run", passage: "Genesis 32:22-32", focus: "Jacob wrestled God all night and walked away limping — and blessed.", practice: "Sit with one of your doubts in prayer. Don't try to solve it. Just hold it before God." },
+      { title: "Faith of others", passage: "Hebrews 11", focus: "When your own faith is shaky, you can borrow the faith of those who've walked before.", practice: "Read about one figure in this chapter. Let their story be a borrowed lamp until your own returns." },
+      { title: "Whom have I but thee", passage: "Psalm 73:23-28", focus: "The end of Asaph's wrestling: 'It is good for me to draw near to God.'", practice: "Make this prayer your own: 'Whom have I in heaven but thee? Even when I doubt, there is no one else I want.'" }
+    ],
+    prayer: "Lord, I believe — help my unbelief. I have questions I can't answer. I won't pretend they're not there. Meet me where Thomas was. Show me your wounds. I'm not running away — I'm wrestling. Hold me through it. Amen."
+  },
+
+  grieving: {
+    acknowledge: "Grief is the price of having loved. It doesn't move in straight lines. There is no schedule. Scripture sits with you in the dark — it doesn't rush you to the morning.",
+    verses: [
+      { ref: "Psalm 34:18", text: "The LORD is nigh unto them that are of a broken heart; and saveth such as be of a contrite spirit.", why: "He doesn't keep distance from the broken. He moves toward them." },
+      { ref: "John 11:33-35", text: "When Jesus therefore saw her weeping, and the Jews also weeping which came with her, he groaned in the spirit, and was troubled... Jesus wept.", why: "He knew Lazarus would rise in minutes. He still wept. Grief isn't unspiritual." },
+      { ref: "Psalm 23:4", text: "Yea, though I walk through the valley of the shadow of death, I will fear no evil: for thou art with me; thy rod and thy staff they comfort me.", why: "It's a valley you walk through — not stay in. And you don't walk it alone." },
+      { ref: "Revelation 21:4", text: "And God shall wipe away all tears from their eyes; and there shall be no more death, neither sorrow, nor crying, neither shall there be any more pain: for the former things are passed away.", why: "The promise isn't that you won't grieve now. It's that grief has an expiration date in him." }
+    ],
+    plan: [
+      { title: "Grief is allowed", passage: "John 11:1-44", focus: "Jesus wept. He let himself feel it before the resurrection.", practice: "Let yourself cry today, if it comes. No suppression. No shame. Tears are prayers without words." },
+      { title: "Lament", passage: "Psalm 13", focus: "'How long, O Lord?' is in the Bible. Lament is faithful prayer.", practice: "Write your own short lament. 'God, I am grieving because___. How long?' Be honest." },
+      { title: "He is near the broken", passage: "Psalm 34", focus: "He doesn't pull away from heartbreak. He draws near.", practice: "When you feel the weight of grief today, picture him sitting near you. Not solving — present." },
+      { title: "The valley", passage: "Psalm 23", focus: "It's the shadow of death, not the substance. And you're walking through.", practice: "Read the psalm aloud. Slowly. Notice every line that says 'thou' or 'me' — the personal presence." },
+      { title: "Comfort", passage: "2 Corinthians 1:3-7", focus: "He comforts in your trouble — and uses your comforted heart to comfort others.", practice: "Reach out to one person who's grieving too. Even if you have nothing to give but presence. That's enough." },
+      { title: "Hope that doesn't deny pain", passage: "1 Thessalonians 4:13-18", focus: "Paul says don't grieve as those without hope — not don't grieve at all.", practice: "Hold the tension: pain is real, hope is real. Both. At once. That's Christian grief." },
+      { title: "All tears wiped", passage: "Revelation 21:1-7", focus: "The end of the story is not where grief stays.", practice: "Picture the scene — God himself wiping tears from your face. Believe it as much as you can today." }
+    ],
+    prayer: "Lord, I am grieving. There's a hole that won't fill. I don't want to be told it'll be okay — I want you here, in it, with me. Be near my broken heart. Walk with me through this valley. I trust that one day you'll wipe these tears. Until then, hold me. Amen."
+  },
+
+  tempted: {
+    acknowledge: "Temptation isn't sin — Jesus was tempted and didn't sin. The pull is real, but so is the way out. Scripture promises both.",
+    verses: [
+      { ref: "1 Corinthians 10:13", text: "There hath no temptation taken you but such as is common to man: but God is faithful, who will not suffer you to be tempted above that ye are able; but will with the temptation also make a way to escape, that ye may be able to bear it.", why: "Three promises: it's not unique to you, it's not bigger than you, and there's an exit door God has prepared." },
+      { ref: "Hebrews 4:15-16", text: "For we have not an high priest which cannot be touched with the feeling of our infirmities; but was in all points tempted like as we are, yet without sin. Let us therefore come boldly unto the throne of grace.", why: "Jesus understands the pull. The temptation didn't make him stop being holy, and yours doesn't make you unwelcome at the throne." },
+      { ref: "James 1:14-15", text: "But every man is tempted, when he is drawn away of his own lust, and enticed. Then when lust hath conceived, it bringeth forth sin: and sin, when it is finished, bringeth forth death.", why: "Temptation has a sequence. James names it so you can interrupt it earlier." },
+      { ref: "Matthew 26:41", text: "Watch and pray, that ye enter not into temptation: the spirit indeed is willing, but the flesh is weak.", why: "Jesus' instruction in Gethsemane. Not just 'pray' — 'watch and pray.' Awareness plus prayer." }
+    ],
+    plan: [
+      { title: "There is a way out", passage: "1 Corinthians 10:1-13", focus: "Paul lists Israel's failures — and then gives the promise.", practice: "Identify the specific moment when temptation usually hits. What's the 'way out' God has provided in that moment? Name it." },
+      { title: "Jesus understands", passage: "Hebrews 4:14-16", focus: "He was tempted in every point. He gets it.", practice: "Tell Jesus the specific temptation by name. Don't be vague. Then ask boldly for grace." },
+      { title: "Cut off the source", passage: "Matthew 5:27-30", focus: "Jesus' radical language about gouging out the eye is hyperbole — but the principle is real.", practice: "Identify one input — an app, a relationship, a place — that fuels the temptation. Cut it off this week." },
+      { title: "Watch and pray", passage: "Matthew 26:36-46", focus: "Even the disciples failed at this. The flesh is weak — that's why prayer matters.", practice: "Set a specific time today to pray about this temptation. Don't wait until you're already in the moment." },
+      { title: "Flee", passage: "2 Timothy 2:22", focus: "Sometimes you don't out-think temptation — you outrun it.", practice: "When you feel the pull today, physically move. Walk away. Change rooms. Call someone. Don't reason with it." },
+      { title: "Confess and bring it to light", passage: "James 5:16", focus: "What stays hidden has power. What's confessed loses it.", practice: "Tell one trusted person about this temptation. Today. Hidden things grow; named things shrink." },
+      { title: "Greater is he", passage: "1 John 4:1-6", focus: "The Spirit in you is greater than the pull from outside.", practice: "When the temptation comes, declare aloud: 'Greater is he that is in me than he that is in the world.' Mean it." }
+    ],
+    prayer: "Lord, I'm being pulled toward something I shouldn't want. I'm tempted, and I'm not pretending I'm not. Show me the way of escape — I'm willing to take it. Strengthen me where I'm weak. Keep me from sin. Be more compelling to me than this temptation. Amen."
+  },
+
+  discouraged: {
+    acknowledge: "Discouragement is when the heart loses its courage — when the long road feels longer than your strength. It's a real wound. And scripture meets it with renewal, not a pep talk.",
+    verses: [
+      { ref: "Galatians 6:9", text: "And let us not be weary in well doing: for in due season we shall reap, if we faint not.", why: "The harvest comes — but in due season. Discouragement gives up just before due season." },
+      { ref: "2 Corinthians 4:16-18", text: "For which cause we faint not; but though our outward man perish, yet the inward man is renewed day by day.", why: "Renewal is daily. Today's exhaustion is being met by today's renewal — even if you can't see it yet." },
+      { ref: "Psalm 42:11", text: "Why art thou cast down, O my soul? and why art thou disquieted within me? hope thou in God: for I shall yet praise him, who is the health of my countenance, and my God.", why: "The psalmist preaches to his own soul. 'I shall yet praise him' — not now, but yet." },
+      { ref: "Isaiah 40:31", text: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.", why: "The waiting itself is the renewal — not what you do while you wait." }
+    ],
+    plan: [
+      { title: "Talk to your soul", passage: "Psalm 42", focus: "The psalmist asks his soul questions instead of just listening to it.", practice: "When the discouraged thoughts come today, push back: 'Why am I cast down? Hope in God.' Don't just receive — interrogate." },
+      { title: "Don't faint", passage: "Galatians 6:1-10", focus: "The reward is real. The temptation to give up is just early.", practice: "Identify one good thing you've been tempted to quit. Take one small step in it today, even if it feels meaningless." },
+      { title: "Renewed daily", passage: "2 Corinthians 4:7-18", focus: "Outward perishing, inward renewing — both true, both real.", practice: "List one way you're 'perishing outwardly' (tired, weary, struggling). Then ask: where might God be renewing me inwardly? Look for it." },
+      { title: "Wait", passage: "Isaiah 40:27-31", focus: "Waiting on the Lord isn't passive — it's leaning your weight on him.", practice: "Spend 15 minutes today doing nothing productive. Just sit. Pray. Wait. Notice what comes." },
+      { title: "Elijah under the juniper", passage: "1 Kings 19:1-18", focus: "God's response to a discouraged prophet: food, sleep, gentle whisper.", practice: "Eat well. Sleep enough. Don't make any big decisions in the discouragement. Care for the body first." },
+      { title: "He has not forsaken", passage: "Lamentations 3:19-26", focus: "From the deepest discouragement, Jeremiah remembers: his mercies are new every morning.", practice: "Read it aloud. Twice. Let 'great is thy faithfulness' move from page to chest." },
+      { title: "Keep going", passage: "Hebrews 12:1-13", focus: "Run the race set before you — not someone else's race, not the whole race, just the next leg.", practice: "Identify the next small step. Take it. Don't worry about step ten. Just step one." }
+    ],
+    prayer: "Lord, I'm discouraged. The road has gotten long and my heart is tired. Renew me. Not the world around me — me, inwardly. Help me wait on you. Help me not give up just before the harvest. I shall yet praise you. Amen."
+  },
+
+  guilty: {
+    acknowledge: "Guilt is the conscience working. There's a kind that drives you to God and a kind that drives you from him. The first is a gift. The second is a lie.",
+    verses: [
+      { ref: "1 John 1:8-9", text: "If we say that we have no sin, we deceive ourselves, and the truth is not in us. If we confess our sins, he is faithful and just to forgive us our sins, and to cleanse us from all unrighteousness.", why: "Confession isn't begging — it's accepting an offer that's already standing. He's faithful and just to forgive." },
+      { ref: "Psalm 103:11-12", text: "For as the heaven is high above the earth, so great is his mercy toward them that fear him. As far as the east is from the west, so far hath he removed our transgressions from us.", why: "The east never meets the west. That's how far he's moved your sin." },
+      { ref: "Romans 8:1-2", text: "There is therefore now no condemnation to them which are in Christ Jesus, who walk not after the flesh, but after the Spirit.", why: "Now. Not someday. Not when you've earned it. Now. The verdict is already in." },
+      { ref: "Psalm 51:1-12", text: "Have mercy upon me, O God, according to thy lovingkindness: according unto the multitude of thy tender mercies blot out my transgressions... Create in me a clean heart, O God; and renew a right spirit within me.", why: "David's prayer after the worst sin of his life. He didn't hide. He came." }
+    ],
+    plan: [
+      { title: "Come into the light", passage: "1 John 1:5-10", focus: "Walking in the light isn't being sinless — it's being honest.", practice: "Confess specifically. Not 'forgive my sins.' Name them. Out loud or written. Let the light hit them." },
+      { title: "How far he moves it", passage: "Psalm 103", focus: "Mercy as high as heaven, sin as far as east from west.", practice: "Read the whole psalm. Let it preach to you. Say aloud: 'My sin has been removed.'" },
+      { title: "No condemnation", passage: "Romans 8:1-17", focus: "The believer's verdict is already 'not guilty' in Christ.", practice: "When the accusing thoughts come, say: 'There is now no condemnation.' Repeat until your soul catches up." },
+      { title: "Clean heart", passage: "Psalm 51", focus: "David asks not just for forgiveness but for renewal.", practice: "Pray Psalm 51 in your own words. Ask not just to be forgiven — to be remade." },
+      { title: "Confess to one another", passage: "James 5:13-16", focus: "Hidden sin festers. Spoken sin loses power.", practice: "If there's a person you've wronged, plan how you'll make it right. If there's a trusted believer, share what you've confessed to God." },
+      { title: "He cleanses", passage: "Hebrews 10:19-25", focus: "The blood of Christ doesn't just cover — it cleanses the conscience.", practice: "If guilt comes back over something already confessed, refuse it. Say: 'That's been forgiven. I will not carry what Christ has paid for.'" },
+      { title: "Walk forward", passage: "Philippians 3:12-14", focus: "Forgetting what's behind. Reaching forward.", practice: "Identify one way the guilt has held you back from doing good. Take a step in that direction today. Let forgiveness propel you forward." }
+    ],
+    prayer: "Father, I'm guilty. I'm not going to argue or excuse it — I bring it to you. Wash me. Forgive me. Don't let me keep carrying what you've already paid for. Create in me a clean heart. I want to walk forward, not stay stuck. Amen."
+  },
+
+  bitter: {
+    acknowledge: "Bitterness is what unprocessed pain becomes — a wound that turned into a posture. It hurts you more than the person you can't forgive. Scripture takes it seriously and offers a way out.",
+    verses: [
+      { ref: "Hebrews 12:14-15", text: "Follow peace with all men, and holiness, without which no man shall see the Lord: Looking diligently lest any man fail of the grace of God; lest any root of bitterness springing up trouble you, and thereby many be defiled.", why: "Bitterness is a root — small now, devastating later. It defiles not just you but the people around you." },
+      { ref: "Ephesians 4:31-32", text: "Let all bitterness, and wrath, and anger, and clamour, and evil speaking, be put away from you, with all malice: And be ye kind one to another, tenderhearted, forgiving one another, even as God for Christ's sake hath forgiven you.", why: "The cure for bitterness is remembering how much you've been forgiven. It puts your debt and theirs in proportion." },
+      { ref: "Romans 12:19", text: "Dearly beloved, avenge not yourselves, but rather give place unto wrath: for it is written, Vengeance is mine; I will repay, saith the Lord.", why: "You don't have to settle the score. He will. That frees you to release it." },
+      { ref: "Matthew 18:21-22", text: "Then came Peter to him, and said, Lord, how oft shall my brother sin against me, and I forgive him? till seven times? Jesus saith unto him, I say not unto thee, Until seven times: but until seventy times seven.", why: "Forgiveness isn't a one-time event for big things — it's a lifestyle for repeated wounds." }
+    ],
+    plan: [
+      { title: "Name it", passage: "Hebrews 12:14-17", focus: "Bitterness can't be uprooted while it's still hidden.", practice: "Write the name of the person and what they did. Be specific. You're not justifying it — you're seeing it." },
+      { title: "Vengeance is his", passage: "Romans 12:14-21", focus: "Releasing them doesn't mean what they did was okay. It means God is the judge, not you.", practice: "Pray: 'God, I give you the right to handle this. I don't have to.' Mean it as much as you can today." },
+      { title: "Your debt and theirs", passage: "Matthew 18:21-35", focus: "The unforgiving servant didn't see the size of what he'd been forgiven.", practice: "List five things God has forgiven in you. Then look at what you're holding against this person. Compare." },
+      { title: "Forgive — a verb, not a feeling", passage: "Ephesians 4:25-32", focus: "Forgiveness is a decision before it's an emotion.", practice: "Decide today: 'I choose to forgive ___, even though I don't feel it yet.' Tell God. The feelings follow." },
+      { title: "Pray for them", passage: "Matthew 5:43-48", focus: "You can't keep hating someone you're praying for. Bitterness can't survive intercession.", practice: "Pray for the person by name. Specifically. Bless them, even if it's through clenched teeth at first." },
+      { title: "Bless, not curse", passage: "Romans 12:9-21", focus: "Overcoming evil with good is the only way out.", practice: "Find one way to bless this person today — even just a kind thought, a prayer for their good. Don't wait for them to deserve it." },
+      { title: "Walk free", passage: "Colossians 3:12-17", focus: "Forgive as the Lord forgave you — and then put on love over it all.", practice: "Symbolically release it. Write the name on paper, then burn or bury it. Tell God: 'I'm done carrying this. I'm free.'" }
+    ],
+    prayer: "Lord, I'm bitter. I'm holding something against ___ that's been growing roots in me. Pull it out. I forgive — not because they deserve it, but because you forgave me. Take this poison from my heart. Set me free. Amen."
+  },
+
+  hopeful: {
+    acknowledge: "Hope is one of the strongest forces in the soul — it stretches toward what isn't yet. Christian hope isn't optimism. It's confidence in someone trustworthy.",
+    verses: [
+      { ref: "Romans 15:13", text: "Now the God of hope fill you with all joy and peace in believing, that ye may abound in hope, through the power of the Holy Spirit.", why: "He is the God of hope. The hope you're feeling has a source — and his Spirit makes it abound." },
+      { ref: "Romans 5:3-5", text: "And not only so, but we glory in tribulations also: knowing that tribulation worketh patience; And patience, experience; and experience, hope: And hope maketh not ashamed.", why: "Real hope is forged. The kind that lasts comes through trials, not despite them." },
+      { ref: "Lamentations 3:21-23", text: "This I recall to my mind, therefore have I hope. It is of the LORD'S mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.", why: "Hope is rebuilt every morning by remembering what's true about God." },
+      { ref: "Hebrews 6:19", text: "Which hope we have as an anchor of the soul, both sure and stedfast, and which entereth into that within the veil.", why: "Hope is anchored not in your circumstances but inside the holy of holies. It can't be moved." }
+    ],
+    plan: [
+      { title: "The God of hope", passage: "Romans 15:13", focus: "Hope has a Person behind it.", practice: "Pray Romans 15:13 over yourself. 'God of hope, fill me with joy and peace in believing, that I may abound in hope.'" },
+      { title: "Hope tested becomes hope strengthened", passage: "Romans 5:1-11", focus: "The kind that doesn't disappoint goes through tribulation.", practice: "Identify a current trial. Ask: how might God be using this to forge a deeper hope in me?" },
+      { title: "Hope that anchors", passage: "Hebrews 6:13-20", focus: "An anchor doesn't stop the storm — it keeps you from drifting.", practice: "Picture your hope as an anchor inside the holy of holies — where Jesus already is. The line goes from there to you." },
+      { title: "New every morning", passage: "Lamentations 3:19-33", focus: "Even from the deepest sorrow, Jeremiah finds hope by remembering.", practice: "Each morning this week, before checking your phone, say: 'His mercies are new this morning. Great is his faithfulness.'" },
+      { title: "Tell someone", passage: "1 Peter 3:15", focus: "Always be ready to give a reason for the hope that's in you.", practice: "Tell one person about the hope you've been feeling — and where it's grounded. Don't keep it to yourself." },
+      { title: "Hope as fuel for endurance", passage: "Hebrews 12:1-3", focus: "Jesus endured the cross 'for the joy set before him.' Hope makes endurance possible.", practice: "Identify one thing you've been about to give up on. Let hope fuel one more day of faithfulness in it." },
+      { title: "Hope that culminates", passage: "Revelation 21:1-7", focus: "The end of the story is the foundation of present hope.", practice: "Read it slowly. Picture it. Let the future shape how you live today. Live like the ending is real." }
+    ],
+    prayer: "God of hope, fill me with joy and peace in believing. The hope I'm feeling — make it deeper, more rooted, more contagious. Anchor my soul in you. Let me live today as someone who knows how the story ends. Amen."
+  },
+
+  numb: {
+    acknowledge: "Numbness isn't the absence of feeling — it's often what happens when the soul has been overwhelmed and shut the windows. God isn't far when you can't feel him. He's not measured by your sensations.",
+    verses: [
+      { ref: "Psalm 88:1-3", text: "O LORD God of my salvation, I have cried day and night before thee: Let my prayer come before thee: incline thine ear unto my cry; For my soul is full of troubles: and my life draweth nigh unto the grave.", why: "Psalm 88 ends in darkness. There is a place in scripture for the believer who can't see the light yet." },
+      { ref: "2 Corinthians 12:9-10", text: "And he said unto me, My grace is sufficient for thee: for my strength is made perfect in weakness... for when I am weak, then am I strong.", why: "Numbness is a weakness. That's exactly where his strength shows up." },
+      { ref: "Isaiah 42:3", text: "A bruised reed shall he not break, and the smoking flax shall he not quench: he shall bring forth judgment unto truth.", why: "Even the faintest smolder of faith — he won't snuff it out. He'll fan it." },
+      { ref: "Romans 8:26", text: "Likewise the Spirit also helpeth our infirmities: for we know not what we should pray for as we ought: but the Spirit itself maketh intercession for us with groanings which cannot be uttered.", why: "When you can't feel, can't pray, can't even articulate it — the Spirit prays for you." }
+    ],
+    plan: [
+      { title: "It's okay not to feel", passage: "Psalm 88", focus: "This psalm has no resolution. And it's still in the Bible.", practice: "Don't try to manufacture feeling. Tell God honestly: 'I can't feel anything right now. I'm just here.'" },
+      { title: "He sees the smoking flax", passage: "Isaiah 42:1-9", focus: "The Servant doesn't break what's barely holding on. He tends it.", practice: "Even if you don't feel anything, show up for prayer or scripture for five minutes. The flax keeps smoking." },
+      { title: "When you can't pray", passage: "Romans 8:18-30", focus: "The Spirit prays for you with groanings too deep for words.", practice: "Sit in silence. Don't try to pray. Trust that the Spirit is interceding for you in this moment." },
+      { title: "Walk anyway", passage: "Habakkuk 3:17-19", focus: "Even when nothing feels alive — figs, vines, herd, flock all gone — he is still my strength.", practice: "Do one ordinary faithful thing today even though it feels mechanical. Faith isn't always feeling — sometimes it's showing up." },
+      { title: "Tell someone safe", passage: "Galatians 6:2", focus: "Bear one another's burdens. You aren't supposed to carry numbness alone.", practice: "Tell one person you trust: 'I'm feeling numb. I'd appreciate prayer.' That's the whole sentence." },
+      { title: "Move the body", passage: "Mark 2:1-12", focus: "The paralytic was carried to Jesus. Sometimes others have to move us when we can't move ourselves.", practice: "Take a walk outside today. Even short. Sun, air, motion. Don't underestimate the body's role in the soul." },
+      { title: "He restores", passage: "Joel 2:23-27", focus: "He promises to restore the years the locust has eaten.", practice: "Believe that this season is not the end. Numbness is a season, not an identity. He restores. Wait for it." }
+    ],
+    prayer: "Lord, I can't feel much right now. I'm not running from you — I'm just empty. I trust that you're here even when I can't sense you. Be patient with me. Tend the smoking flax. Restore me in your time. Amen."
+  },
+
+  inadequate: {
+    acknowledge: "The feeling of not being enough often hits hardest in those who are actually trying. Scripture doesn't tell you that you are enough — it tells you that he is, and that he chose you anyway.",
+    verses: [
+      { ref: "2 Corinthians 3:5", text: "Not that we are sufficient of ourselves to think any thing as of ourselves; but our sufficiency is of God.", why: "Paul agrees with you — you aren't sufficient. The good news isn't that you are. It's that God is, in you." },
+      { ref: "1 Corinthians 1:26-29", text: "For ye see your calling, brethren, how that not many wise men after the flesh, not many mighty, not many noble, are called: But God hath chosen the foolish things of the world to confound the wise; and God hath chosen the weak things of the world to confound the mighty.", why: "He picked the inadequate on purpose. So no one could brag about themselves." },
+      { ref: "Exodus 4:10-12", text: "And Moses said unto the LORD, O my Lord, I am not eloquent, neither heretofore, nor since thou hast spoken unto thy servant: but I am slow of speech, and of a slow tongue. And the LORD said unto him, Who hath made man's mouth?... Now therefore go, and I will be with thy mouth, and teach thee what thou shalt say.", why: "Moses tried to disqualify himself. God didn't argue with the assessment — he promised presence." },
+      { ref: "Philippians 4:13", text: "I can do all things through Christ which strengtheneth me.", why: "The 'I' in this verse is a weak Paul. The 'all things' includes hunger, abundance, prison, freedom. Through Christ. Not on his own." }
+    ],
+    plan: [
+      { title: "Agree with the diagnosis", passage: "2 Corinthians 3:1-6", focus: "Paul says: yes, we aren't sufficient of ourselves. That's the starting point.", practice: "Stop fighting the feeling of inadequacy. Say: 'I'm not enough — and that's okay, because he is.'" },
+      { title: "He chose the foolish", passage: "1 Corinthians 1:18-31", focus: "God's pattern is to use those the world overlooks.", practice: "Reflect: where do you feel most disqualified? That might be exactly where God wants to work." },
+      { title: "Moses' resume", passage: "Exodus 3:1-4:17", focus: "Moses lists his disqualifications. God says, 'I will be with thee.'", practice: "Write your list of inadequacies. Beside each, write: 'I will be with thee.' Read it aloud." },
+      { title: "Strength in weakness", passage: "2 Corinthians 12:1-10", focus: "Paul's thorn wasn't removed. God's grace was given.", practice: "Stop praying for the inadequacy to vanish. Pray: 'Let your strength be perfected in this weakness.'" },
+      { title: "He works the work", passage: "Philippians 1:6", focus: "He who began a good work will complete it. You don't have to.", practice: "Identify one thing you've been trying to perfect on your own. Hand it back to him. Let him do his work." },
+      { title: "Compare less", passage: "Galatians 6:1-5", focus: "Each man should examine his own work. Not someone else's.", practice: "Limit comparison today. When you find yourself measuring against someone else, return to the one assignment in front of you." },
+      { title: "Through Christ", passage: "Philippians 4:10-13", focus: "Paul learned contentment in inadequacy and abundance both.", practice: "Memorize Philippians 4:13. Say it before doing the thing that makes you feel inadequate. He strengthens." }
+    ],
+    prayer: "Lord, I feel inadequate — and I am. I'm not pretending otherwise. Be sufficient where I'm not. Strengthen me through Christ. Use me anyway, like you used Moses, and Gideon, and Peter — flawed, afraid, unqualified, and called. Amen."
+  },
+
+  jealous: {
+    acknowledge: "Jealousy is the soul saying: 'They have what I want.' It points at a desire — and at a place where you don't trust God's distribution. Naming it is the first move toward freedom.",
+    verses: [
+      { ref: "James 3:14-16", text: "But if ye have bitter envying and strife in your hearts, glory not, and lie not against the truth. This wisdom descendeth not from above, but is earthly, sensual, devilish. For where envying and strife is, there is confusion and every evil work.", why: "James names it as devilish. Strong language — because it's that destructive." },
+      { ref: "Galatians 5:19-21", text: "Now the works of the flesh are manifest, which are these... emulations, wrath, strife, seditions, heresies, envyings...", why: "Envy is in the same list as obvious sins. We tend to give it a pass. Paul doesn't." },
+      { ref: "Psalm 73:2-3", text: "But as for me, my feet were almost gone; my steps had well nigh slipped. For I was envious at the foolish, when I saw the prosperity of the wicked.", why: "Asaph almost lost his footing over envy. He says it openly. The honesty is part of the way out." },
+      { ref: "1 Corinthians 13:4", text: "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up.", why: "Love is what envy isn't. Growing in love is how envy starves." }
+    ],
+    plan: [
+      { title: "Confess it", passage: "Psalm 73", focus: "Asaph names the envy specifically. Don't soften it.", practice: "Tell God: 'I am jealous of ___ for ___.' Specific. Don't generalize. Name the person and the thing." },
+      { title: "What it points to", passage: "James 4:1-6", focus: "Envy reveals a desire. James asks where the desire is mis-aimed.", practice: "Ask: what is the deeper desire under this jealousy? Recognition? Security? Love? Bring that desire to God." },
+      { title: "His distribution is wise", passage: "1 Corinthians 12:4-11", focus: "Different gifts to different people — by his choice, not random.", practice: "Thank God for two specific things you DO have. Don't compare to what others have. Just receive." },
+      { title: "Your race, not theirs", passage: "John 21:18-22", focus: "Peter asks about John's path. Jesus says: 'What is that to thee? Follow thou me.'", practice: "When you catch yourself looking sideways at someone else's life, return to: 'Follow thou me.' That's the whole assignment." },
+      { title: "Rejoice with those who rejoice", passage: "Romans 12:15", focus: "The opposite of envy isn't indifference — it's celebration.", practice: "Celebrate one thing happening for the person you've been jealous of. Out loud or in prayer. Mean it." },
+      { title: "Love is not envious", passage: "1 Corinthians 13", focus: "Love displaces envy. The two can't coexist.", practice: "Do one act of love toward the person you're jealous of. A kindness, a prayer, a genuine compliment." },
+      { title: "Whom have I but thee", passage: "Psalm 73:23-28", focus: "Asaph's resolution: God is enough.", practice: "Say: 'Whom have I in heaven but thee? You are the strength of my heart and my portion forever.' Mean it as much as you can." }
+    ],
+    prayer: "Lord, I'm jealous, and I'm not going to hide it. I want what they have. Show me what's underneath. Help me trust your distribution. Replace this envy with love. Let me celebrate them and follow you, without measuring sideways. Amen."
+  },
+
+  restless: {
+    acknowledge: "Restlessness is the soul looking for something it hasn't found yet. Augustine said our hearts are restless until they rest in God. The restlessness itself is a kind of homing signal.",
+    verses: [
+      { ref: "Psalm 62:5-7", text: "My soul, wait thou only upon God; for my expectation is from him. He only is my rock and my salvation: he is my defence; I shall not be moved. In God is my salvation and my glory: the rock of my strength, and my refuge, is in God.", why: "Wait only upon God. The 'only' is doing a lot of work — it diagnoses where the restlessness comes from." },
+      { ref: "Matthew 11:28-29", text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls.", why: "Soul-rest. Not just stop-being-busy rest. The kind restlessness actually wants." },
+      { ref: "Ecclesiastes 3:11", text: "He hath made every thing beautiful in his time: also he hath set the world in their heart, so that no man can find out the work that God maketh from the beginning to the end.", why: "He set eternity in your heart. No earthly thing will fit it. The restlessness is honest." },
+      { ref: "Psalm 46:10", text: "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.", why: "Stillness is commanded — because it's possible. Restlessness can be quieted." }
+    ],
+    plan: [
+      { title: "Be still", passage: "Psalm 46", focus: "'Be still' is in the middle of a chaotic psalm — wars, mountains shaking. Stillness is internal.", practice: "Sit five minutes in silence. No phone. No agenda. Just sit. Notice what comes up." },
+      { title: "Wait only", passage: "Psalm 62", focus: "Your soul is waiting — but on what? David says: only on God.", practice: "Identify what you've been waiting on for satisfaction (recognition, a relationship, an outcome). Take a step away from leaning on it." },
+      { title: "Eternity in your heart", passage: "Ecclesiastes 3", focus: "The restlessness has a reason. You were built for more than this world.", practice: "Each time the restlessness hits today, say: 'This is eternity in my heart, calling me home.' Let it point upward, not sideways." },
+      { title: "Soul rest", passage: "Matthew 11:25-30", focus: "Jesus' yoke gives soul-rest, not just bodily rest.", practice: "Bring the restlessness specifically to Jesus. Tell him what you keep chasing. Ask for his yoke instead." },
+      { title: "Settle your soul", passage: "Psalm 131", focus: "Three short verses about a quieted soul. Like a weaned child.", practice: "Memorize Psalm 131. Read it aloud morning and night this week." },
+      { title: "Less, not more", passage: "Luke 10:38-42", focus: "Mary chose one thing. Martha was restless and distracted.", practice: "Cut one input today. Less news, less scrolling, less consumption. Make room for stillness." },
+      { title: "He is the rock", passage: "Psalm 62:1-12", focus: "When the soul finds the rock, the restlessness drops.", practice: "Pray: 'You are my rock. Let my soul rest in you alone.' Rest, in this sense, is a verb you do." }
+    ],
+    prayer: "Lord, I'm restless. I keep reaching for things and none of them fit. You set eternity in my heart — quiet me with yourself. Be my rock. Be my rest. Let my soul wait only on you. Amen."
+  },
+
+  burned_out: {
+    acknowledge: "Burnout isn't laziness — it's the natural result of giving more than was being replenished, often for too long, often for good reasons. The body and soul are saying: this can't continue. They're right.",
+    verses: [
+      { ref: "1 Kings 19:4-8", text: "But he himself went a day's journey into the wilderness, and came and sat down under a juniper tree: and he requested for himself that he might die... And as he lay and slept under a juniper tree, behold, then an angel touched him, and said unto him, Arise and eat.", why: "Elijah, after his greatest spiritual victory, was burned out and suicidal. God's response: food, sleep, food, sleep. Not a sermon." },
+      { ref: "Mark 6:31", text: "And he said unto them, Come ye yourselves apart into a desert place, and rest a while: for there were many coming and going, and they had no leisure so much as to eat.", why: "Jesus pulled the disciples out of ministry to rest. He prescribed it. So can you." },
+      { ref: "Matthew 11:28-30", text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls.", why: "His yoke is easy. If yours isn't, you may be wearing the wrong one." },
+      { ref: "Psalm 23:1-3", text: "The LORD is my shepherd; I shall not want. He maketh me to lie down in green pastures: he leadeth me beside the still waters. He restoreth my soul.", why: "He makes you lie down. Burnout sometimes is his way of doing that when you wouldn't otherwise." }
+    ],
+    plan: [
+      { title: "Care for the body", passage: "1 Kings 19:1-8", focus: "Before God spoke to Elijah, an angel made him eat. Twice.", practice: "Eat well today. Sleep enough. Drink water. Don't underestimate how much of burnout is physical." },
+      { title: "Step away", passage: "Mark 6:30-32", focus: "Jesus pulled them out, even when crowds wanted them.", practice: "Cancel something this week that's not essential. Even one thing. The world will not end." },
+      { title: "His yoke is easy", passage: "Matthew 11:28-30", focus: "If your yoke is killing you, it may not be his.", practice: "Make a list of what you're carrying. Honestly ask: which of these did Jesus actually give me, and which did I assume?" },
+      { title: "Made to lie down", passage: "Psalm 23", focus: "Sometimes the shepherd makes you lie down because you wouldn't on your own.", practice: "Lie down this afternoon — even 15 minutes — without screens. Let yourself be still." },
+      { title: "Whisper", passage: "1 Kings 19:9-13", focus: "After the wind, earthquake, fire — God spoke in a still small voice. Burnout dulls hearing for it.", practice: "Spend 10 minutes in silence today. No music, no podcast. Listen for the still small voice." },
+      { title: "Sustainable, not heroic", passage: "Exodus 18:13-27", focus: "Moses tried to do too much. His father-in-law said: this isn't sustainable.", practice: "Identify one thing you've been doing that someone else could do. Delegate it or release it this week." },
+      { title: "Rest as worship", passage: "Hebrews 4:1-11", focus: "Sabbath rest is faith expressed by stopping.", practice: "Take a true Sabbath this week. Twenty-four hours. Worship, eat, sleep, walk. Trust that God can run the world without you for a day." }
+    ],
+    prayer: "Lord, I'm burned out. I've been pushing past what I had to give. I let work, even good work, become more than it should be. Lay me down in green pastures. Restore my soul. Teach me your easy yoke. Show me what's actually mine to carry. Amen."
+  },
+
+  // Default for unmatched feelings
+  default: {
+    acknowledge: "Whatever you're feeling, it's welcome here. Scripture has wisdom for the whole range of the human soul — even the feelings hard to name.",
+    verses: [
+      { ref: "Psalm 139:1-4", text: "O LORD, thou hast searched me, and known me. Thou knowest my downsitting and mine uprising, thou understandest my thought afar off. Thou compassest my path and my lying down, and art acquainted with all my ways. For there is not a word in my tongue, but, lo, O LORD, thou knowest it altogether.", why: "He already knows what you're feeling — even if you don't have a name for it." },
+      { ref: "Hebrews 4:15-16", text: "For we have not an high priest which cannot be touched with the feeling of our infirmities... Let us therefore come boldly unto the throne of grace, that we may obtain mercy, and find grace to help in time of need.", why: "Whatever this is — bring it. Boldly. There's mercy and timely grace at the throne." },
+      { ref: "Psalm 62:8", text: "Trust in him at all times; ye people, pour out your heart before him: God is a refuge for us.", why: "Pour it out — not pretty, not organized. Just pour it out. He's a refuge." },
+      { ref: "Romans 8:26-27", text: "Likewise the Spirit also helpeth our infirmities: for we know not what we should pray for as we ought: but the Spirit itself maketh intercession for us with groanings which cannot be uttered.", why: "When you can't articulate it, the Spirit prays it for you. You're never alone in the prayer." }
+    ],
+    plan: [
+      { title: "He searches and knows", passage: "Psalm 139", focus: "Whatever you're feeling, he already sees it.", practice: "Read Psalm 139 aloud. Let yourself be seen by God today, even the parts you don't understand." },
+      { title: "Pour it out", passage: "Psalm 62", focus: "Don't filter. Just bring the whole thing.", practice: "Spend 10 minutes writing or praying with no editing. Whatever comes — bring it." },
+      { title: "Come boldly", passage: "Hebrews 4:14-16", focus: "The throne is of grace, not condemnation.", practice: "Pray as if you have full access — because you do. Ask boldly. Receive timely grace." },
+      { title: "When words fail", passage: "Romans 8:18-30", focus: "The Spirit prays when you can't.", practice: "Sit in silence. Trust that the Spirit is praying for you, even now." },
+      { title: "Be still and know", passage: "Psalm 46", focus: "Sometimes the way through is not action but stillness.", practice: "Sit five minutes. No fixing, no deciding. Just be. Know that he is God." },
+      { title: "Daily bread", passage: "Matthew 6:5-15", focus: "Jesus' prayer is for daily bread — daily, enough for today.", practice: "Pray the Lord's Prayer slowly. Linger on each line. Let it shape your asking." },
+      { title: "Cast and rest", passage: "1 Peter 5:6-11", focus: "Cast your care. He cares.", practice: "Whatever you've been carrying — cast it on him. Picture handing it over. He's strong enough." }
+    ],
+    prayer: "Lord, I'm not even sure what I'm feeling right now. But you know. I bring it to you — the whole thing. Search me. Know me. Be my refuge. Pour out grace where I can't even ask for it specifically. Amen."
+  }
+};
+
+// ============================================================
+// STUDY LIBRARY — Verse breakdowns
+// Each entry: ref, text, translation, context, theme, words[], breakdown, crossRefs[], application
+// ============================================================
+const STUDY_LIBRARY = {
+  "john 3:16": {
+    ref: "John 3:16",
+    text: "For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have everlasting life.",
+    translation: "KJV",
+    context: "Spoken by Jesus to Nicodemus, a Pharisee and member of the Jewish ruling council, who came to Jesus by night with questions about his identity. The conversation begins with being 'born again' (vv. 3-8), moves to belief and the lifted-up Son of Man (vv. 14-15), and lands here. Verse 16 is not Jesus reciting a memory verse — it's the climax of a midnight theology lesson to a respected teacher who didn't yet understand the kingdom.",
+    theme: "The cost and reach of God's redeeming love.",
+    words: [
+      { original: "ἀγαπάω (agapaō)", translit: "loved", meaning: "Not romantic affection or natural fondness, but a willed, sacrificial love that gives without requiring return. The verb form here is aorist — pointing to a specific decisive act of love, the cross." },
+      { original: "κόσμος (kosmos)", translit: "world", meaning: "Not just the planet, but humanity in its rebellion. John uses 'kosmos' often for the world system in opposition to God. The shock: God loved the world that hated him." },
+      { original: "μονογενῆ (monogenē)", translit: "only begotten / one and only", meaning: "Unique, one-of-a-kind. Not 'only created' (which would deny Christ's eternity) but 'only of his kind.' The Son is unique in his eternal relation to the Father." },
+      { original: "πιστεύων (pisteuōn)", translit: "believing", meaning: "Present active participle — ongoing trust, not a one-time mental nod. The believing is continuous, a settled posture of reliance on Christ." },
+      { original: "ζωὴν αἰώνιον (zōēn aiōnion)", translit: "everlasting life", meaning: "Not just unending duration — a quality of life. Eternal life begins now in knowing God (cf. John 17:3) and continues forever." }
+    ],
+    breakdown: [
+      { title: "For God so loved", content: "The 'so' (houtōs) doesn't mean 'so much' but 'in this way' — pointing forward to the giving. The verse defines the manner of God's love by the action that follows. Love that gives the Son is the only kind of love John is talking about." },
+      { title: "The world", content: "Not 'the lovely' or 'the deserving.' The very world that 'lieth in wickedness' (1 John 5:19) is the object of this love. Grace doesn't find what's lovable — it makes lovable what wasn't." },
+      { title: "He gave his only begotten Son", content: "The verb is the same word used in v. 14 of Moses 'lifting up' the bronze serpent. The giving is unto the cross. The Father's love and the Son's sacrifice are not in tension — they are one motion." },
+      { title: "Whosoever believeth", content: "Universal scope (whosoever) joined to specific means (believing). The offer extends to all; the entrance is faith. Believing is presented as the human response that receives what God has already done." },
+      { title: "Should not perish but have everlasting life", content: "Two destinies, named together. Perishing is the default. Everlasting life is the alternative made available through the Son. The verse is not just sentiment — it's a fork in the road." }
+    ],
+    crossRefs: [
+      { ref: "Romans 5:8", note: "God commendeth his love toward us, in that, while we were yet sinners, Christ died for us. Same love-defined-by-the-cross." },
+      { ref: "1 John 4:9-10", note: "John makes the same point — love is not our love for God but his sending of the Son." },
+      { ref: "John 3:14-15", note: "Immediate context: as Moses lifted up the serpent, so must the Son of Man be lifted up." },
+      { ref: "Numbers 21:4-9", note: "The bronze serpent. Look and live. The Old Testament picture Jesus uses in vv. 14-15." },
+      { ref: "Romans 6:23", note: "The wages of sin is death; but the gift of God is eternal life through Jesus Christ. Same fork in the road." }
+    ],
+    application: "This verse is too familiar to be safe. Read it as if for the first time. Notice: God acted first. Love was decided before you responded. The cross is not God hoping you'll be lovable — it's God making you so. If you struggle to believe you're loved, return to the verb tense: God so loved (past, decisive). The transaction is finished. Your part is to keep believing — to lean your weight on what's already been done."
+  },
+
+  "romans 8:28": {
+    ref: "Romans 8:28",
+    text: "And we know that all things work together for good to them that love God, to them who are the called according to his purpose.",
+    translation: "KJV",
+    context: "Paul is in the middle of his argument that nothing can separate believers from God's love (Romans 8). The chapter moves from no condemnation (v. 1) through the Spirit's adoption and intercession (vv. 14-27) to this verse, then to the unbreakable chain of salvation (vv. 29-30) and the unstoppable love of God in Christ (vv. 31-39). Verse 28 is the hinge — the assurance that the suffering of v. 18 and the groaning of v. 22-23 are not random.",
+    theme: "God's sovereign weaving of all circumstances toward the good of his people.",
+    words: [
+      { original: "συνεργεῖ (synergei)", translit: "work together", meaning: "Where we get 'synergy.' Things don't work for good in isolation — they work together. God weaves disparate threads into one fabric. Some manuscripts have God as the explicit subject ('God works all things together'), preserved in some modern translations." },
+      { original: "ἀγαθόν (agathon)", translit: "good", meaning: "Not 'pleasant' or 'comfortable.' Defined by v. 29 — being conformed to the image of his Son. The good is sanctification, ultimate Christlikeness, glorification — not the absence of pain." },
+      { original: "κλητοῖς (klētois)", translit: "called", meaning: "The effectual call of God, not a generic invitation. Paul ties this 'good' specifically to those God has called by his purpose, not to all people indiscriminately." },
+      { original: "πρόθεσιν (prothesin)", translit: "purpose", meaning: "A pre-set plan. God's eternal intention. The 'good' isn't accidental optimism — it's the working out of a settled divine design." }
+    ],
+    breakdown: [
+      { title: "And we know", content: "Not 'we hope' or 'we feel.' Paul writes from prison facing execution and says 'we know.' This is settled apostolic certainty, not wishful thinking." },
+      { title: "That all things", content: "All. Not just the good. Not just the bearable. The hardest things in your life are included. The cancer, the betrayal, the unanswered prayer — all in 'all.'" },
+      { title: "Work together for good", content: "Together — not individually. Many things in your life are not good in themselves. But God weaves them. The dark threads are part of the picture. Don't try to evaluate any single thread — trust the Weaver." },
+      { title: "To them that love God", content: "The promise is targeted, not universal. It applies to those who love God — and Paul defines that love by the call (next phrase), not by intensity of feeling." },
+      { title: "The called according to his purpose", content: "Two truths: God called you, and he had a purpose in calling you. Both anchor the promise. The 'good' is whatever serves that eternal purpose — most of all, your conformity to Christ (v. 29)." }
+    ],
+    crossRefs: [
+      { ref: "Romans 8:29-30", note: "Defines the 'good': predestined, called, justified, glorified — conformed to the image of the Son." },
+      { ref: "Genesis 50:20", note: "Joseph: 'Ye thought evil against me; but God meant it unto good.' The same theology, lived out." },
+      { ref: "James 1:2-4", note: "Trials work for our good by producing endurance and maturity." },
+      { ref: "2 Corinthians 4:17", note: "Light affliction working a far more exceeding weight of glory." },
+      { ref: "Hebrews 12:6-11", note: "God's discipline yields the peaceful fruit of righteousness — the 'good' of v. 28 in another image." }
+    ],
+    application: "This is one of the most-quoted and most-misused verses in the Bible. It does not promise that everything will be pleasant or that you'll see the good in this life. It promises that the God who called you is weaving every thread — including the painful ones — toward an eternal good you may not yet see. Hold it lightly when comforting others (it can wound when offered too quickly). Hold it firmly when comforting yourself."
+  },
+
+  "philippians 4:13": {
+    ref: "Philippians 4:13",
+    text: "I can do all things through Christ which strengtheneth me.",
+    translation: "KJV",
+    context: "Paul is writing from prison, thanking the Philippian church for their gift. Verses 11-12 set up this verse: Paul has learned contentment in want and abundance, hunger and fullness. Verse 13 is not a victory cry for athletic achievement — it's the punchline of a paragraph about being content in deprivation. The 'all things' refers specifically to the conditions Paul has just described.",
+    theme: "Christ-given strength for the conditions God appoints, not a guarantee of successful outcomes.",
+    words: [
+      { original: "πάντα (panta)", translit: "all things", meaning: "Bounded by context — the 'all things' of vv. 11-12: hunger, abundance, lack, plenty. Not 'anything I want to do,' but 'every condition I'm placed in.'" },
+      { original: "ἰσχύω (ischyō)", translit: "I can do / I have strength", meaning: "Not capability for any feat, but inner strength to endure and live well. Paul is talking about a sustaining power, not a superpower." },
+      { original: "ἐνδυναμοῦντι (endynamounti)", translit: "strengtheneth", meaning: "Present active — ongoing, continuous empowerment. Not a one-time infusion but a moment-by-moment supply from Christ." }
+    ],
+    breakdown: [
+      { title: "I can do", content: "Paul's confidence is not in his own resources. He's just said in v. 12 that he 'knows how to be abased.' The 'I can' is borrowed strength, not self-sufficiency." },
+      { title: "All things", content: "Read in context. Paul lists what 'all things' means in the prior verses: being abased and abounding, full and hungry, having abundance and lack. Not 'anything I attempt.'" },
+      { title: "Through Christ", content: "The means and the source. The strength is Christ's, channeled through union with him. Apart from this connection, the 'I can' becomes empty boasting." },
+      { title: "Which strengtheneth me", content: "The verb keeps pumping. Christ doesn't strengthen once and leave. He keeps pouring strength as the condition demands. Hard seasons get more strength, not less." }
+    ],
+    crossRefs: [
+      { ref: "Philippians 4:11-12", note: "The immediate context — defines what 'all things' actually means." },
+      { ref: "2 Corinthians 12:9-10", note: "Paul's other testimony: 'My grace is sufficient.' Strength in weakness." },
+      { ref: "Ephesians 3:16", note: "Strengthened with might by his Spirit in the inner man." },
+      { ref: "Isaiah 40:29", note: "He giveth power to the faint. The OT echo of the same truth." },
+      { ref: "John 15:5", note: "Without me ye can do nothing. The other side of the same coin." }
+    ],
+    application: "This verse is often printed on athletic gear and tattooed on biceps as if it guarantees performance. It doesn't. It guarantees Christ-supplied strength to endure whatever conditions you find yourself in — including failure, including poverty, including humiliation. The promise is contentment in any state, not victory in every contest. Read with v. 11-12 to feel its actual weight. Then it becomes more comforting, not less — because it's a promise that holds when you're losing."
+  },
+
+  "jeremiah 29:11": {
+    ref: "Jeremiah 29:11",
+    text: "For I know the thoughts that I think toward you, saith the LORD, thoughts of peace, and not of evil, to give you an expected end.",
+    translation: "KJV",
+    context: "Spoken to the Jewish exiles in Babylon, around 597 BC, after the first deportation under Nebuchadnezzar. False prophets were telling them they'd be home soon. Jeremiah writes to say: no — settle in. Build houses, plant gardens, marry, have children. You will be in exile 70 years (v. 10). After that, God will fulfill his promise. Verse 11 is not a graduation card — it's a word for people who just learned their suffering will outlast them by decades.",
+    theme: "God's faithful long-term plan for his covenant people, even through prolonged judgment.",
+    words: [
+      { original: "מַחֲשָׁבוֹת (machashavot)", translit: "thoughts / plans", meaning: "Not passing thoughts but settled designs. Plans, devised purposes. God isn't musing about Israel — he has fixed intentions." },
+      { original: "שָׁלוֹם (shalom)", translit: "peace", meaning: "Wholeness, well-being, flourishing. Not just the absence of war but the fullness of life as God meant it. The opposite of the 'evil' in the next phrase." },
+      { original: "אַחֲרִית (acharit)", translit: "expected end / future", meaning: "A 'latter end' — the outcome of the whole story. God is committed to a future for them beyond the exile, not just relief in the moment." },
+      { original: "תִקְוָה (tiqvah)", translit: "hope", meaning: "Often included in modern translations: 'a future and a hope.' The word means an expectant cord — a tether stretching forward to what God has promised." }
+    ],
+    breakdown: [
+      { title: "I know the thoughts", content: "God's plans for Israel are settled, even when their circumstances feel chaotic. Their exile is not God's loss of control — it's part of his plan." },
+      { title: "Thoughts of peace and not of evil", content: "The 'evil' here is calamity, not moral evil. God is saying: my ultimate intention for you is good, even when this season looks bad." },
+      { title: "An expected end", content: "There is a destination. Their suffering has a limit and a purpose. The 70 years are not the end of their story — they're a chapter." },
+      { title: "Spoken to a suffering people", content: "This verse must be read against its setting. It is comfort in the middle of judgment, not promise of ease. God speaks tenderly to people enduring his discipline." }
+    ],
+    crossRefs: [
+      { ref: "Jeremiah 29:10", note: "The seventy-year context. Read together to feel the weight." },
+      { ref: "Romans 8:28", note: "The NT counterpart for individual believers." },
+      { ref: "Isaiah 55:8-9", note: "God's thoughts are not our thoughts. He sees a longer arc." },
+      { ref: "Lamentations 3:22-26", note: "Jeremiah's other voice — hope rebuilt every morning, even from the ashes." },
+      { ref: "Ephesians 1:11", note: "He works all things after the counsel of his will." }
+    ],
+    application: "This verse has been ripped from its context to mean 'God has a personal career plan for me.' The original audience was hearing: 'You will die in Babylon. Your grandchildren will return.' The promise is bigger and slower than we usually want. Apply it the way God meant it — as comfort that he is faithful through long, hard seasons, that he has not forgotten, that the story has an end he has already chosen. Don't read it to mean 'tomorrow will be easy.' Read it to mean 'the long arc bends toward his good.'"
+  },
+
+  "psalm 23:1": {
+    ref: "Psalm 23:1",
+    text: "The LORD is my shepherd; I shall not want.",
+    translation: "KJV",
+    context: "A psalm of David, who knew shepherding from the inside out. The whole psalm is six verses of pastoral imagery applied to God's care of his people. Verse 1 is the thesis of the psalm — every other verse expounds it. David is not romanticizing shepherding (a low-status job) but saying: the most ordinary, dirty, vigilant work is what God does for me.",
+    theme: "Comprehensive trust in God's personal, attentive care.",
+    words: [
+      { original: "יְהוָה (YHWH)", translit: "LORD", meaning: "The covenant name of God — 'I AM.' The personal, faithful God who has bound himself to his people. Not a generic deity but the God of Abraham, Isaac, Jacob — and David." },
+      { original: "רֹעִי (ro'i)", translit: "my shepherd", meaning: "A possessive — 'my' shepherd. The relationship is personal, not institutional. The verb 'shepherd' means to feed, lead, protect, tend. It's a job description that includes everything." },
+      { original: "אֶחְסָר (echsar)", translit: "I shall (not) want", meaning: "To lack, to be in need. The negation is absolute. Not 'I shall have everything I want' but 'I shall lack nothing I need.' What the shepherd determines I need, I will have." }
+    ],
+    breakdown: [
+      { title: "The LORD", content: "The covenant God of Israel. David doesn't say 'a god is shepherding me.' He names the God of his fathers. The shepherd is the God of the burning bush." },
+      { title: "Is my shepherd", content: "The metaphor controls the whole psalm. Shepherds in David's world were fully invested — finding pasture, fighting predators, carrying lambs, sleeping in the open. This is the picture of God's care." },
+      { title: "I shall not want", content: "The conclusion that follows from the premise. If the LORD is my shepherd, then I will not lack. The shepherd's competence is the basis of the sheep's confidence." }
+    ],
+    crossRefs: [
+      { ref: "John 10:11", note: "Jesus: 'I am the good shepherd: the good shepherd giveth his life for the sheep.' Psalm 23 fulfilled." },
+      { ref: "Ezekiel 34:11-16", note: "God's promise to shepherd his people himself when their leaders failed." },
+      { ref: "Isaiah 40:11", note: "He shall feed his flock like a shepherd: he shall gather the lambs with his arm." },
+      { ref: "1 Peter 5:4", note: "The chief Shepherd shall appear. The same shepherd, returning." },
+      { ref: "Hebrews 13:20", note: "The great shepherd of the sheep, raised from the dead." }
+    ],
+    application: "If you can really say verse 1, the rest of the psalm follows. The hard part isn't memorizing — it's believing in the lack. 'I shall not want' is a claim. Are you living as if it's true? When you find yourself anxious, hoarding, grasping, the question is whether the shepherd is your shepherd in fact, not just in theory. Slow down on the first verse. The rest of the psalm is just unpacking it."
+  },
+
+  "matthew 6:33": {
+    ref: "Matthew 6:33",
+    text: "But seek ye first the kingdom of God, and his righteousness; and all these things shall be added unto you.",
+    translation: "KJV",
+    context: "From the Sermon on the Mount, in the section where Jesus is addressing anxiety about food, drink, and clothing (vv. 25-34). He has just pointed to birds and lilies — God feeds and clothes them, will he not do the same for you? Verse 33 is the positive command underneath the negative one ('Take no thought'). Don't worry — instead, seek first.",
+    theme: "Reordered priorities as the antidote to material anxiety.",
+    words: [
+      { original: "ζητεῖτε (zēteite)", translit: "seek", meaning: "Present imperative — keep on seeking. Not a one-time search but a continuous orientation. The verb can mean to seek something lost, to strive after a goal, to actively pursue." },
+      { original: "πρῶτον (prōton)", translit: "first", meaning: "Primarily, chiefly — in priority of importance. Not first chronologically (do this before doing other things) but first in value (let this rule everything else)." },
+      { original: "βασιλείαν (basileian)", translit: "kingdom", meaning: "The reign or rule of God — not a geographic place but his active sovereignty. Where God's will is done, the kingdom is present." },
+      { original: "δικαιοσύνην (dikaiosynēn)", translit: "righteousness", meaning: "Right standing, right living. Both the gift (right standing before God) and the practice (right behavior under God's rule)." },
+      { original: "προστεθήσεται (prostethēsetai)", translit: "shall be added", meaning: "Future passive — 'will be added to you' by God. Not earned but given. The material things follow as gift, not wage." }
+    ],
+    breakdown: [
+      { title: "But seek ye first", content: "The 'but' contrasts with the anxious seeking of v. 32 ('after all these things do the Gentiles seek'). Two kinds of seeking: anxious for stuff, focused on the kingdom. Pick one." },
+      { title: "The kingdom of God", content: "Make God's reign your primary pursuit — his rule in your heart, your life, your priorities, your decisions. Submit everything to it." },
+      { title: "And his righteousness", content: "Not just God's reign but his right ways. Live by his standards. Pursue what he calls good. The two are paired — you can't have the king without his ethics." },
+      { title: "And all these things shall be added", content: "The 'all these things' refers back to food, drink, clothing — the basics. Not Lamborghinis. Jesus is promising provision, not luxury. The Father knows what you need (v. 32) and gives it to those who seek the kingdom first." }
+    ],
+    crossRefs: [
+      { ref: "Matthew 6:25-32", note: "The full anxiety passage — birds, lilies, the Father's care." },
+      { ref: "1 Kings 3:5-13", note: "Solomon asks for wisdom, not riches. God adds the riches as a result." },
+      { ref: "Proverbs 3:9-10", note: "Honor God first; the storehouses fill as a result." },
+      { ref: "Luke 12:31-32", note: "Luke's parallel — fear not, little flock, the Father gives the kingdom." },
+      { ref: "Philippians 4:19", note: "My God shall supply all your need according to his riches in glory." }
+    ],
+    application: "Honest test: What do you actually seek first? Not what you'd say if asked — what your time, money, attention, anxieties reveal. The promise of provision is tied to the priority of the kingdom. Many believers want the 'all these things' part without the 'seek first' part. It doesn't work that way. Reorder, and the rest follows."
+  },
+
+  "ephesians 2:8": {
+    ref: "Ephesians 2:8-9",
+    text: "For by grace are ye saved through faith; and that not of yourselves: it is the gift of God: Not of works, lest any man should boast.",
+    translation: "KJV",
+    context: "Paul has just described the spiritual deadness of all humanity (vv. 1-3) and the rich mercy of God who made the dead alive in Christ (vv. 4-7). Verses 8-9 summarize the entire mechanism of salvation. They are the doctrinal heart of Ephesians and one of the clearest gospel summaries in the New Testament.",
+    theme: "Salvation as wholly the gift of God, never the achievement of man.",
+    words: [
+      { original: "χάριτι (chariti)", translit: "by grace", meaning: "Unearned favor. Not just kindness but kindness toward those who deserve the opposite. The instrumental dative — grace is the means by which salvation comes." },
+      { original: "σεσῳσμένοι (sesōsmenoi)", translit: "are saved", meaning: "Perfect passive participle. Already saved, with continuing effect. Salvation is a completed reality with present consequences — not something still being earned." },
+      { original: "πίστεως (pisteōs)", translit: "faith", meaning: "Trust, reliance. The hand that receives the gift. Not the source of salvation but the channel through which grace comes." },
+      { original: "δῶρον (dōron)", translit: "gift", meaning: "A present freely given. The specific word for a gift, emphasizing that nothing is owed in exchange. Not a wage, not a reward — a gift." }
+    ],
+    breakdown: [
+      { title: "For by grace are ye saved", content: "Grace is the cause — the unmerited favor of God. Salvation begins not with human seeking but with divine giving. The cause is in God, not in us." },
+      { title: "Through faith", content: "Faith is the means, not the cause. We are not saved because of our faith (as if faith were a meritorious work) but through faith — the empty hand that receives." },
+      { title: "And that not of yourselves", content: "The 'that' is debated. Some hold it refers to faith ('faith is a gift'), others to the whole salvation event. Either way, the point is clear: nothing in this is from us." },
+      { title: "It is the gift of God", content: "Direct, plain, unambiguous. Salvation is gift. Not partly. Not initially. All gift." },
+      { title: "Not of works, lest any man should boast", content: "The reason for the gift-mechanism: to remove all ground for human boasting. If any of this were earned, salvation would produce pride. Because none of it is, salvation produces gratitude and humility." }
+    ],
+    crossRefs: [
+      { ref: "Ephesians 2:1-7", note: "The full setup — dead in sin, made alive by mercy." },
+      { ref: "Romans 3:23-24", note: "All sinned, all fall short, all justified freely by his grace." },
+      { ref: "Titus 3:5", note: "Not by works of righteousness which we have done, but according to his mercy he saved us." },
+      { ref: "Romans 4:4-5", note: "To him that worketh, the reward is reckoned not of grace, but of debt. Faith is the alternative to working." },
+      { ref: "Galatians 2:16", note: "Not justified by works of the law, but by the faith of Jesus Christ." }
+    ],
+    application: "If you've been trying to add to your salvation by good behavior, performance, religious effort — stop. You can't add to a finished gift. If you've been tempted to despair because you've fallen — return to the gift. The basis of your standing was never your performance. It was always grace. Live grateful, not anxious. Live free, not striving. Boast only in Christ."
+  },
+
+  "isaiah 40:31": {
+    ref: "Isaiah 40:31",
+    text: "But they that wait upon the LORD shall renew their strength; they shall mount up with wings as eagles; they shall run, and not be weary; and they shall walk, and not faint.",
+    translation: "KJV",
+    context: "Isaiah 40 opens the second half of the book — words of comfort to a future exiled Israel. The chapter begins 'Comfort ye, comfort ye my people' (v. 1) and proceeds to magnify God's incomparable greatness against the smallness of the nations. Verses 27-31 address Israel's complaint that God has forgotten them. Verse 31 is the promise to the weary — the answer to the question 'where do we get strength to keep going?'",
+    theme: "Renewal of strength through waiting on the unwearying God.",
+    words: [
+      { original: "קֹוֵי (qovei)", translit: "wait upon", meaning: "From qavah — to wait expectantly, to hope, to look for. Related to qav (a cord, a stretching out). To wait is to stretch toward God in active expectation. Not passive — leaning, looking, hoping." },
+      { original: "יַחֲלִיפוּ (yachalifu)", translit: "renew / exchange", meaning: "From chalaph — to change, to exchange. Their strength isn't merely refreshed — it's exchanged. They trade their depleted strength for his." },
+      { original: "כֹּחַ (koach)", translit: "strength", meaning: "Power, ability. The same word used in v. 29 of God who 'gives power to the faint.' The strength they receive is from his abundant store." },
+      { original: "יָעַף (ya'af) / יָגַע (yaga')", translit: "weary / faint", meaning: "Two distinct Hebrew words. Ya'af: to be exhausted from exertion. Yaga': to grow faint, to lose heart. The promise covers both physical exhaustion and inner discouragement." }
+    ],
+    breakdown: [
+      { title: "But they that wait upon the LORD", content: "The 'but' contrasts with v. 30 — even strong young men exhaust themselves. The exception is those who wait. The action that produces strength is, paradoxically, waiting." },
+      { title: "Shall renew their strength", content: "Not 'shall be given a little extra' but 'shall exchange.' They put down their old, depleted strength and pick up his. The transaction is the renewal." },
+      { title: "Mount up with wings as eagles", content: "Eagles soar by riding currents — they don't flap their way to altitude. The picture: rising with God's wind beneath you, going higher with less effort." },
+      { title: "Run and not be weary", content: "The middle pace. Not just dramatic moments of soaring but sustainable speed for the active seasons. Strength for the daily race." },
+      { title: "Walk and not faint", content: "The hardest. Soaring is occasional; running is intermittent; walking is everyday. The promise climaxes here — the steady, plodding, ordinary faithfulness that doesn't quit. This is the deepest miracle." }
+    ],
+    crossRefs: [
+      { ref: "Isaiah 40:28-30", note: "Immediate context — God doesn't faint; even youth do. Read together to feel the contrast." },
+      { ref: "Psalm 27:14", note: "Wait on the LORD, be of good courage, and he shall strengthen thine heart." },
+      { ref: "Lamentations 3:25", note: "The LORD is good unto them that wait for him." },
+      { ref: "2 Corinthians 12:9", note: "The NT counterpart — strength made perfect in weakness." },
+      { ref: "Psalm 130:5-6", note: "I wait for the LORD, my soul doth wait, and in his word do I hope." }
+    ],
+    application: "Most of us want the soaring. Isaiah saves the deepest promise for the walking — the steady, unspectacular endurance that's hardest to sustain. If you're tired and the soaring isn't coming, you're not failing the verse. The promise covers ordinary feet on ordinary roads. Wait isn't passive: it's leaning expectantly on God instead of grinding harder on yourself. Stretch toward him today. Trade your strength for his."
+  },
+
+  "proverbs 3:5": {
+    ref: "Proverbs 3:5-6",
+    text: "Trust in the LORD with all thine heart; and lean not unto thine own understanding. In all thy ways acknowledge him, and he shall direct thy paths.",
+    translation: "KJV",
+    context: "Proverbs 3 is a chapter of fatherly counsel from Solomon to his son, packed with binary contrasts — trust the LORD vs. lean on yourself, honor God vs. follow your own ways. Verses 5-6 are the most famous pair. They sit in a passage promising that wisdom yields long life, peace, and divine favor (vv. 1-12). The verses are not abstract — they're practical decision-making theology.",
+    theme: "Trust as the alternative to self-reliance in navigating life.",
+    words: [
+      { original: "בָּטַח (batach)", translit: "trust", meaning: "To rely on, take refuge in, feel safe in. Not just intellectual assent — putting your weight on something. The stronger Hebrew word for trust." },
+      { original: "לֵב (lev)", translit: "heart", meaning: "Not just emotion. The center of will, mind, and affection — the whole inner person. 'All your heart' means: nothing held back, no compartment kept under self-rule." },
+      { original: "שָׁעַן (sha'an)", translit: "lean", meaning: "To support oneself, to rest one's weight on. The picture is a person leaning on a staff. Where you lean reveals what you trust." },
+      { original: "בִּינָה (binah)", translit: "understanding", meaning: "Discernment, insight, the ability to distinguish. Not bad in itself — Solomon prizes wisdom — but dangerous when it becomes the foundation rather than the tool." },
+      { original: "יָשַׁר (yashar)", translit: "direct / make straight", meaning: "To make smooth, level, straight. Not 'make easy' but 'set rightly oriented.' The path may still be hard, but it will be the right path." }
+    ],
+    breakdown: [
+      { title: "Trust in the LORD", content: "Active reliance — putting your weight down. The object is the covenant God, named specifically. Not generic faith but trust in this particular God." },
+      { title: "With all thine heart", content: "Whole-hearted, not partial. Most of us trust God for some things and ourselves for others. The proverb cuts off that division." },
+      { title: "Lean not unto thine own understanding", content: "Not 'don't think' — 'don't lean.' Use your mind, but don't rest your full weight on it. Your understanding is finite; God's is not. Trust the One who sees all." },
+      { title: "In all thy ways acknowledge him", content: "All — work, money, relationships, decisions, recreation. 'Acknowledge' means to know him in it, recognize him, include him. He gets a vote in every department." },
+      { title: "He shall direct thy paths", content: "Not 'show you a five-year plan' but 'set your steps in the right line.' Direction is a daily gift, not a downloaded map." }
+    ],
+    crossRefs: [
+      { ref: "Psalm 37:5", note: "Commit thy way unto the LORD; trust also in him; and he shall bring it to pass." },
+      { ref: "Jeremiah 17:5-8", note: "Cursed is the man that trusteth in man... blessed is the man that trusteth in the LORD." },
+      { ref: "James 1:5", note: "If any of you lack wisdom, let him ask of God. The NT echo." },
+      { ref: "Isaiah 26:3", note: "Thou wilt keep him in perfect peace, whose mind is stayed on thee: because he trusteth in thee." },
+      { ref: "Psalm 32:8", note: "I will instruct thee and teach thee in the way which thou shalt go." }
+    ],
+    application: "The verse is often quoted at graduations as if it's a promise that God will tell you which job to take. It might. But the heart of it is daily, not pivotal. The trust is for now — this hour, this conversation, this decision. Lean on him. Acknowledge him. The direction comes step by step, usually only visible looking back. Are you holding any decision tightly, leaning on your own understanding right now? Open the hand."
+  },
+
+  "psalm 46:10": {
+    ref: "Psalm 46:10",
+    text: "Be still, and know that I am God: I will be exalted among the heathen, I will be exalted in the earth.",
+    translation: "KJV",
+    context: "Psalm 46 is the song that inspired Luther's 'A Mighty Fortress Is Our God.' The psalm describes catastrophic chaos — earth removed, mountains carried into the sea, waters roaring (vv. 2-3) — and yet 'God is our refuge' (v. 1). The middle section depicts God's defense of his city (vv. 4-7). Verse 10 is God speaking — a command thundered into the chaos. It's not a meditation aid; it's the voice of the Almighty silencing the nations.",
+    theme: "God's sovereign command to cease striving and recognize his rule.",
+    words: [
+      { original: "הַרְפּוּ (harpu)", translit: "be still / cease", meaning: "From rapha — to let go, drop your hands, stop striving. Not just 'be quiet' but 'stop fighting, stop scrambling.' The same word is used elsewhere of dropping a weapon. It's a command to surrender." },
+      { original: "דְעוּ (de'u)", translit: "know", meaning: "From yada — to know intimately, by experience. Not just intellectual recognition. Cease your striving and experientially know who is God." },
+      { original: "אֱלֹהִים (Elohim)", translit: "God", meaning: "The Mighty One. The plural form used in singular reference — emphasizing the fullness of divine power. The God who is being announced is overwhelmingly capable." },
+      { original: "אָרוּם (arum)", translit: "I will be exalted", meaning: "From rum — to be lifted up, raised high. God's exaltation is not what we accomplish for him but what he accomplishes himself. He will be exalted, regardless." }
+    ],
+    breakdown: [
+      { title: "Be still", content: "The command is jarring in context. The world is collapsing in vv. 2-3. The nations are raging in v. 6. Then God says: stop. The stillness is not because nothing is happening but because Someone is over it all." },
+      { title: "And know that I am God", content: "The reason to be still: not denial of the chaos but recognition of who reigns over it. Stillness without this knowing is just exhaustion. Knowing without stillness is just theology. Both together is faith." },
+      { title: "I will be exalted among the heathen", content: "The nations rage (v. 6) but he will be exalted in them. They cannot prevent his glory. History runs through nations, not around them, toward his exaltation." },
+      { title: "I will be exalted in the earth", content: "Universal scope. Not just in Israel, not just among believers — in the earth. The whole creation will see his glory. The end is not in doubt." }
+    ],
+    crossRefs: [
+      { ref: "Psalm 46:1-3", note: "The chaos that the verse speaks into. Read the whole psalm to feel the weight." },
+      { ref: "Exodus 14:13-14", note: "Stand still, and see the salvation of the LORD. The same theology, lived." },
+      { ref: "Habakkuk 2:14", note: "The earth shall be filled with the knowledge of the glory of the LORD." },
+      { ref: "Philippians 2:9-11", note: "The NT echo — every knee will bow, every tongue confess. He will be exalted." },
+      { ref: "Isaiah 40:1-5", note: "The voice that cries in the wilderness — God's glory revealed." }
+    ],
+    application: "Most people read this verse as a meditation tip — calm down, breathe, find your center. The original meaning is fiercer. It's God's command to stop your frantic effort and look up. The stillness isn't self-care; it's surrender. What weapon are you holding? What are you trying to control? The command is to drop it and know who actually reigns. He will be exalted — with or without your scrambling."
+  },
+
+  "philippians 4:6": {
+    ref: "Philippians 4:6-7",
+    text: "Be careful for nothing; but in every thing by prayer and supplication with thanksgiving let your requests be made known unto God. And the peace of God, which passeth all understanding, shall keep your hearts and minds through Christ Jesus.",
+    translation: "KJV",
+    context: "Paul, writing from prison, is closing his letter with practical exhortations. Verses 4-9 form a cluster: rejoice always, be moderate, don't worry but pray, think on what's true. The 'peace of God' in v. 7 is the result promised to those who actually do v. 6. The verses are paired — you can't have the peace without the practice.",
+    theme: "Anxiety transformed by specific, thankful prayer.",
+    words: [
+      { original: "μεριμνᾶτε (merimnate)", translit: "be anxious / careful", meaning: "From merimnaō — to be anxious, divided in mind. The same word Jesus uses in Matthew 6:25 ('take no thought for your life'). It pictures a mind pulled in multiple directions by worry." },
+      { original: "δεήσει (deēsei)", translit: "supplication", meaning: "Specific, earnest request. Not general prayer but pointed asking for specific needs. The opposite of vague spirituality." },
+      { original: "εὐχαριστίας (eucharistias)", translit: "thanksgiving", meaning: "Gratitude. The word from which we get 'eucharist.' Notice it's not optional — every request is to be wrapped in thanks." },
+      { original: "εἰρήνη (eirēnē)", translit: "peace", meaning: "Wholeness, well-being, the absence of internal war. The OT shalom transposed into Greek. Not just calm feelings — a settled state of soul." },
+      { original: "φρουρήσει (phrourēsei)", translit: "shall keep / guard", meaning: "Military term — to garrison, to stand sentinel over. The peace of God doesn't just sit beside your heart — it guards it like soldiers at a gate." }
+    ],
+    breakdown: [
+      { title: "Be careful for nothing", content: "An imperative — a command, not a suggestion. 'Nothing' is total. Paul knows what he's asking; he's writing from prison facing execution. The standard is high." },
+      { title: "But in every thing", content: "The contrast: not 'nothing' (worry) but 'everything' (prayer). Every situation that could trigger worry becomes a trigger for prayer instead. Substitution, not suppression." },
+      { title: "By prayer and supplication", content: "Two words for prayer. Prayer is the broader posture; supplication is the specific request. Both — bring the whole orientation and bring specific asks." },
+      { title: "With thanksgiving", content: "The hinge. Without thanksgiving, prayer can become more anxious. Thanksgiving anchors the prayer in what God has already done — making future trust possible." },
+      { title: "Let your requests be made known", content: "Make them specific. Not vague 'help me, God.' Particular, concrete, named. God isn't checking the form, but specificity helps you actually surrender it." },
+      { title: "The peace of God shall keep your hearts and minds", content: "The result. Not 'might' — 'shall.' The peace stands guard over the inner life. It's God's peace, not yours — guarding the place worry used to control." }
+    ],
+    crossRefs: [
+      { ref: "Matthew 6:25-34", note: "Jesus' fuller treatment of anxiety — birds, lilies, the Father's care." },
+      { ref: "1 Peter 5:6-7", note: "Cast all your care on him; for he careth for you. Same theology." },
+      { ref: "John 14:27", note: "Peace I leave with you, my peace I give unto you. The source of Paul's promise." },
+      { ref: "Isaiah 26:3", note: "Thou wilt keep him in perfect peace, whose mind is stayed on thee." },
+      { ref: "Colossians 3:15", note: "Let the peace of God rule in your hearts. The same peace, in active rule." }
+    ],
+    application: "Most of us pray when we're worried, but without thanksgiving — and then wonder why peace doesn't come. Try this exact recipe: when worry rises, name the specific request, then list three things you're thankful for, then make the ask. The peace isn't a feeling you produce; it's the fruit of obeying the verse. The 'guard' is real. Practice and watch."
+  },
+
+  "matthew 11:28": {
+    ref: "Matthew 11:28-30",
+    text: "Come unto me, all ye that labour and are heavy laden, and I will give you rest. Take my yoke upon you, and learn of me; for I am meek and lowly in heart: and ye shall find rest unto your souls. For my yoke is easy, and my burden is light.",
+    translation: "KJV",
+    context: "Jesus speaks this after a section of pronouncing woe on cities that rejected him (vv. 20-24) and after thanking the Father for revealing himself to babes rather than the wise (vv. 25-27). The invitation in vv. 28-30 stands as a contrast: the burden of religious legalism (the Pharisees' yoke) versus the rest of coming to him. The audience would have heard 'yoke' as a rabbinic term for a teacher's interpretation of the law.",
+    theme: "Christ's invitation to weary souls to exchange a crushing yoke for his light one.",
+    words: [
+      { original: "δεῦτε (deute)", translit: "come", meaning: "An adverbial command — 'come here!' Direct, urgent, personal. Jesus isn't suggesting consideration. He's calling." },
+      { original: "κοπιῶντες (kopiōntes)", translit: "labour", meaning: "From kopiaō — to grow weary from intense labor, to toil. The exhaustion of effort, especially fruitless effort." },
+      { original: "πεφορτισμένοι (pephortismenoi)", translit: "heavy laden", meaning: "Perfect passive — to be weighted down, burdened. The image is of a pack animal under a load too heavy. Often used in the gospels of the Pharisees' added burdens." },
+      { original: "ζυγόν (zygon)", translit: "yoke", meaning: "A wooden bar joining two oxen for plowing. Rabbis used it figuratively for a teacher's authoritative interpretation. To take Jesus' yoke is to submit to his teaching and his way." },
+      { original: "πραΰς (praus)", translit: "meek", meaning: "Gentle, considerate, not harsh. Not weakness — strength under control. The same word is used of Moses, the meekest man on earth." },
+      { original: "χρηστός (chrēstos)", translit: "easy", meaning: "Useful, kind, well-fitting. A yoke that's chrēstos is one that fits the ox properly — doesn't chafe, doesn't injure. Jesus' yoke fits." }
+    ],
+    breakdown: [
+      { title: "Come unto me", content: "The invitation is to a Person, not to a system. Christianity is not first a set of teachings — it's coming to Christ. He is the rest." },
+      { title: "All ye that labour and are heavy laden", content: "The audience is the exhausted. Not the strong. Not the qualified. The exhausted of religious effort, of life's weight, of failed striving. He calls the tired specifically." },
+      { title: "I will give you rest", content: "Initial rest. The rest of coming. The relief of arrival. Stop running, you're here." },
+      { title: "Take my yoke upon you", content: "There is still a yoke. Christianity is not no demands. But the yoke is his — and shaped by him. Joining to him in obedience." },
+      { title: "Learn of me; for I am meek and lowly in heart", content: "The character of the master determines the difficulty of the yoke. Jesus is gentle. He doesn't drive his disciples; he leads them. The yoke is easy because he is good." },
+      { title: "Ye shall find rest unto your souls", content: "Deeper rest. Not just initial relief but soul-rest — the kind that goes all the way down. The kind anxiety can't displace." },
+      { title: "My yoke is easy and my burden is light", content: "Not 'no yoke, no burden' — but right-fitting, manageable. The Christian life has demands. They're not crushing. The contrast is with the legalism that destroys." }
+    ],
+    crossRefs: [
+      { ref: "Jeremiah 6:16", note: "Stand ye in the ways and ask for the old paths... and ye shall find rest for your souls. The OT echo Jesus is fulfilling." },
+      { ref: "Isaiah 14:3", note: "Rest from sorrow, from fear, from hard bondage. The promised rest." },
+      { ref: "Hebrews 4:9-11", note: "There remaineth therefore a rest to the people of God." },
+      { ref: "Matthew 23:4", note: "The Pharisees bind heavy burdens... but Jesus offers a yoke that's light." },
+      { ref: "1 John 5:3", note: "His commandments are not grievous. Same theology." }
+    ],
+    application: "If your Christian life feels crushing, you may be wearing the wrong yoke. Jesus' yoke is easy — meaning it fits, it doesn't chafe, it doesn't break the back. If yours does, ask whether you've taken on someone else's expectations, your own perfectionism, religious performance — burdens Jesus didn't lay on you. Come back to him. The rest he gives is for souls. Stop adjusting the yoke; come to the master."
+  },
+
+  "1 corinthians 13:4": {
+    ref: "1 Corinthians 13:4-7",
+    text: "Charity suffereth long, and is kind; charity envieth not; charity vaunteth not itself, is not puffed up, Doth not behave itself unseemly, seeketh not her own, is not easily provoked, thinketh no evil; Rejoiceth not in iniquity, but rejoiceth in the truth; Beareth all things, believeth all things, hopeth all things, endureth all things.",
+    translation: "KJV",
+    context: "Sandwiched between Paul's discussions of spiritual gifts (chapters 12 and 14), this 'love chapter' is not an abstract poem about love — it's a corrective. The Corinthians prized impressive gifts (especially tongues) without love. Paul says: without love, your gifts are nothing. Then he describes what love actually looks like in concrete behavior, knowing the Corinthians failed at most of these.",
+    theme: "Love defined by behavior, not feeling — and required for any spiritual gift to mean anything.",
+    words: [
+      { original: "ἀγάπη (agapē)", translit: "charity / love", meaning: "Sacrificial, willed love. KJV's 'charity' (from Latin caritas) preserves the willed nature, but modern English makes it sound institutional. The Greek is the love-as-action that gives without requiring return." },
+      { original: "μακροθυμεῖ (makrothymei)", translit: "suffereth long", meaning: "Long-tempered, patient with people. Not slow to act, but slow to anger. The word for not retaliating quickly when wronged." },
+      { original: "ζηλοῖ (zēloi)", translit: "envieth", meaning: "From zelos — to be jealous of, covet. Love doesn't measure sideways at what others have." },
+      { original: "λογίζεται (logizetai)", translit: "thinketh", meaning: "An accounting term — to keep records, to tally. Love doesn't keep score of wrongs. Modern translations: 'keeps no record of wrongs.'" },
+      { original: "στέγει (stegei)", translit: "beareth", meaning: "Literally 'covers' — like a roof. Love covers a multitude of sins, doesn't expose for spectacle, protects." }
+    ],
+    breakdown: [
+      { title: "Suffereth long, and is kind", content: "The first two — patience and kindness — frame the whole list. Long-suffering is the negative (not retaliating), kindness is the positive (actively good)." },
+      { title: "Envieth not, vaunteth not, is not puffed up", content: "Love kills three forms of self: jealousy, boasting, pride. Where love is, the self shrinks. Where the self looms, love can't grow." },
+      { title: "Doth not behave itself unseemly", content: "Love has manners. It honors others, doesn't humiliate, considers context. Crude or harsh behavior is not 'authenticity' — it's failure of love." },
+      { title: "Seeketh not her own", content: "Love isn't transactional. It doesn't ask 'what do I get?' Love acts for the good of the other, period." },
+      { title: "Is not easily provoked, thinketh no evil", content: "Love is hard to anger. And love doesn't keep score — doesn't catalog every wound for later retrieval. Most relationships die over collected grievances." },
+      { title: "Rejoiceth not in iniquity, but rejoiceth in the truth", content: "Love isn't just nice — it cares about right and wrong. It doesn't celebrate moral failure (in self or others) but celebrates truth, even hard truth." },
+      { title: "Beareth, believeth, hopeth, endureth all things", content: "Four 'all things.' Love covers, trusts, hopes, endures. It doesn't fold under pressure. The strongest force in the universe outside God himself." }
+    ],
+    crossRefs: [
+      { ref: "1 Corinthians 13:1-3", note: "The setup — gifts without love are nothing." },
+      { ref: "1 John 4:7-12", note: "Love is from God; God is love. The source." },
+      { ref: "John 13:34-35", note: "By this shall all men know ye are my disciples — if ye have love." },
+      { ref: "Romans 5:5", note: "The love of God is shed abroad in our hearts by the Holy Ghost. The means of producing this kind of love." },
+      { ref: "Galatians 5:22-23", note: "The fruit of the Spirit is love... Love is what the Spirit produces." }
+    ],
+    application: "Read this passage with your name in place of 'charity.' 'Nickey suffereth long, and is kind; Nickey envieth not...' How did that go? The exercise isn't to make you feel guilty — it's to reveal where the Spirit needs to grow love in you. Pick one phrase that hit hardest. Pray for that one this week. Love isn't manufactured by trying — it's produced by the Spirit working in surrender. But you can ask, daily."
+  },
+
+  "hebrews 11:1": {
+    ref: "Hebrews 11:1",
+    text: "Now faith is the substance of things hoped for, the evidence of things not seen.",
+    translation: "KJV",
+    context: "The author of Hebrews has been exhorting weary Jewish Christians to endure (10:32-39), ending with 'the just shall live by faith.' Chapter 11 then defines and illustrates faith with a long catalogue of OT examples — Abel, Enoch, Noah, Abraham, Moses, and many more. Verse 1 is the working definition that introduces the gallery.",
+    theme: "Faith as the substance and evidence of unseen, future realities.",
+    words: [
+      { original: "ὑπόστασις (hypostasis)", translit: "substance / assurance", meaning: "Literally 'standing under' — that which underlies, the foundation. Used in commerce for a title deed (the document that gives substance to a property claim). Faith is what gives reality, in the present, to what's still future." },
+      { original: "ἐλπιζομένων (elpizomenōn)", translit: "things hoped for", meaning: "Present passive participle — things being hoped for. The future promises that hope reaches toward." },
+      { original: "ἔλεγχος (elenchos)", translit: "evidence / proof", meaning: "Conviction based on demonstration — the kind of evidence that convinces in a court. Faith is the inner conviction that proves the unseen." },
+      { original: "βλεπομένων (blepomenōn)", translit: "things not seen", meaning: "Things not visible, not seen with physical eyes. The unseen realm of God's promises and presence." }
+    ],
+    breakdown: [
+      { title: "Now faith is", content: "The author gives a definition. Not 'faith is a feeling' or 'faith is religion.' A precise statement of what faith does." },
+      { title: "The substance of things hoped for", content: "Faith makes hoped-for realities tangible now. It's the title deed that proves the property is yours, even before you live in it. The future is real now because faith makes it so." },
+      { title: "The evidence of things not seen", content: "Faith is the inner certainty that demonstrates the unseen. It's not blind belief — it's conviction grounded in God's character and word, that holds even when sight gives no support." }
+    ],
+    crossRefs: [
+      { ref: "Hebrews 11:6", note: "Without faith it is impossible to please him: for he that cometh to God must believe that he is, and that he is a rewarder of them that diligently seek him." },
+      { ref: "2 Corinthians 5:7", note: "We walk by faith, not by sight. Same theology." },
+      { ref: "Romans 8:24-25", note: "Hope that is seen is not hope: for what a man seeth, why doth he yet hope for? But if we hope for that we see not, then do we with patience wait for it." },
+      { ref: "John 20:29", note: "Blessed are they that have not seen, and yet have believed." },
+      { ref: "Romans 4:18-21", note: "Abraham, against hope believed in hope. Faith in unseen promise." }
+    ],
+    application: "Faith isn't a leap in the dark — it's confidence in someone trustworthy whose word reaches into the future. When you can't see how, faith holds. When you can't see God acting, faith says 'he's still God.' The whole rest of Hebrews 11 shows ordinary people who acted on unseen promises and are now in the great hall of faith. Their faith was tested by long delay, by suffering, by death without receiving the promise (vv. 13, 39-40). And it held. So can yours."
+  },
+
+  "2 corinthians 5:17": {
+    ref: "2 Corinthians 5:17",
+    text: "Therefore if any man be in Christ, he is a new creature: old things are passed away; behold, all things are become new.",
+    translation: "KJV",
+    context: "Paul has been defending his ministry to the Corinthians. In chapter 5 he writes about the ministry of reconciliation — that God was in Christ reconciling the world to himself. Verse 17 is part of that argument: those reconciled to God are not just forgiven but made new. The verse stands in a passage about new categories — new judgment, new motivation, new ministry, new identity.",
+    theme: "The radical newness of life in union with Christ.",
+    words: [
+      { original: "ἐν Χριστῷ (en Christō)", translit: "in Christ", meaning: "Paul's signature phrase. Not just believing about Christ but being united to him by the Spirit. A change of location — relocated into Christ — that becomes a change of identity." },
+      { original: "καινὴ κτίσις (kainē ktisis)", translit: "new creature / new creation", meaning: "Kainē means new in quality, not just chronologically. A new kind of thing. Ktisis can mean a creature or the act of creation. Some translate 'a new creation' — pointing to the eschatological newness already breaking in." },
+      { original: "παρῆλθεν (parēlthen)", translit: "passed away", meaning: "Aorist — happened decisively. The old has already passed. Not 'is passing' or 'will pass' — it's done." },
+      { original: "γέγονεν (gegonen)", translit: "are become", meaning: "Perfect tense — has come to be, with continuing effect. The new state is established and remains." }
+    ],
+    breakdown: [
+      { title: "Therefore if any man be in Christ", content: "The condition: union with Christ. Not just admiration of him, not just association with his people — being in him by faith." },
+      { title: "He is a new creature", content: "Not 'will be' someday — is, now. The change of identity is current. You don't graduate into newness — you start there at conversion." },
+      { title: "Old things are passed away", content: "The old self, the old life, the old way of standing before God — gone. The aorist tense makes it decisive. Not slowly fading — already done." },
+      { title: "Behold, all things are become new", content: "Behold — pay attention. This is worth seeing. All things — not just one or two areas. The whole life, the whole identity, the whole framework. New." }
+    ],
+    crossRefs: [
+      { ref: "Galatians 6:15", note: "In Christ Jesus neither circumcision availeth any thing, nor uncircumcision, but a new creature. Same Greek phrase." },
+      { ref: "Ephesians 4:22-24", note: "Put off the old man... put on the new man, which after God is created in righteousness." },
+      { ref: "Colossians 3:9-10", note: "Have put off the old man with his deeds, and have put on the new man." },
+      { ref: "Romans 6:4", note: "Buried with him by baptism into death... we also should walk in newness of life." },
+      { ref: "Revelation 21:5", note: "Behold, I make all things new. The cosmic version of what's already true in the believer." }
+    ],
+    application: "Many Christians live as their old self trying to behave better. The verse says: you're not the old self anymore. The struggle isn't to become new — you are new. The struggle is to live consistent with the newness that's already true. When old patterns rise, you can say: 'That's not who I am anymore.' Identity precedes behavior. Live from the new, not toward it."
+  },
+
+  "joshua 1:9": {
+    ref: "Joshua 1:9",
+    text: "Have not I commanded thee? Be strong and of a good courage; be not afraid, neither be thou dismayed: for the LORD thy God is with thee whithersoever thou goest.",
+    translation: "KJV",
+    context: "Moses has just died. Joshua, his assistant, is now the leader of Israel — about to take them across the Jordan into a land defended by walled cities. Joshua 1 records God's commissioning speech. Three times in this passage God says 'be strong and of a good courage' (vv. 6, 7, 9) — because Joshua needed to hear it three times. Verse 9 is the climax, with a personal command tied to a personal promise.",
+    theme: "Courage as the commanded response to fear, grounded in God's abiding presence.",
+    words: [
+      { original: "חֲזַק (chazaq)", translit: "be strong", meaning: "To be firm, prevail, harden oneself. Active strength, not passive endurance. Often used of military courage." },
+      { original: "אֱמָץ (amats)", translit: "of a good courage", meaning: "To be alert, be courageous, be resolute. The word emphasizes inner firmness — the courage that holds when shaken." },
+      { original: "אַל-תַּעֲרֹץ (al-ta'arots)", translit: "neither be dismayed", meaning: "Do not be terrified, broken, shattered. The Hebrew pictures someone whose nerve breaks under pressure. God commands the opposite." },
+      { original: "עִמְּךָ (immecha)", translit: "with thee", meaning: "Beside, accompanying. Not 'for you' or 'over you' — with you. The presence is companional." }
+    ],
+    breakdown: [
+      { title: "Have not I commanded thee?", content: "Rhetorical question. God reminds Joshua: this is not a suggestion. Courage is commanded — meaning it's possible. God doesn't command what can't be done." },
+      { title: "Be strong and of a good courage", content: "Strength and courage paired. Strength is for the doing; courage is for the facing. Both are needed." },
+      { title: "Be not afraid, neither be thou dismayed", content: "Fear and dismay — twin enemies. Fear paralyzes; dismay shatters. Both are forbidden because both can be resisted when the next phrase is true." },
+      { title: "For the LORD thy God is with thee", content: "The basis of the command. The reason courage is possible. Not because the danger isn't real but because God's presence is more real." },
+      { title: "Whithersoever thou goest", content: "Universal scope. Every place, every situation. The promise has no exceptions. Where you go, he is." }
+    ],
+    crossRefs: [
+      { ref: "Deuteronomy 31:6-8", note: "Moses' charge to Joshua and Israel, repeated to Joshua here. 'He will not fail thee, nor forsake thee.'" },
+      { ref: "Hebrews 13:5-6", note: "I will never leave thee, nor forsake thee. The NT echo, with the same triple-negative emphasis." },
+      { ref: "Isaiah 41:10", note: "Fear thou not; for I am with thee. The same theology — fear forbidden because God is with you." },
+      { ref: "Matthew 28:20", note: "Lo, I am with you alway, even unto the end of the world. Jesus echoing this promise." },
+      { ref: "Romans 8:31", note: "If God be for us, who can be against us? Pauline application." }
+    ],
+    application: "Joshua needed this verse three times. So do you. Courage isn't a personality trait — it's a commanded response to God's promised presence. When fear comes, the move isn't to white-knuckle it. It's to remember who's with you. Whithersoever you go — into the meeting, into the diagnosis, into the conversation, into the unknown — he is there. Be strong. Be of good courage. He has commanded it because it's possible."
+  },
+
+  "lamentations 3:22": {
+    ref: "Lamentations 3:22-23",
+    text: "It is of the LORD's mercies that we are not consumed, because his compassions fail not. They are new every morning: great is thy faithfulness.",
+    translation: "KJV",
+    context: "Lamentations is Jeremiah's funeral dirge over Jerusalem after its destruction by Babylon in 586 BC. The book is five poems of grief. Chapter 3 is the longest and structurally the center — and at its very middle, in vv. 22-23, comes this stunning turn. From the bottom of national catastrophe, Jeremiah finds reason to hope. The verses are not denial of the suffering — they're hope in the middle of it.",
+    theme: "The faithfulness of God renewed daily, even amid devastating loss.",
+    words: [
+      { original: "חַסְדֵי (chasdei)", translit: "mercies / steadfast love", meaning: "From chesed — the covenant loyalty of God, his loving-kindness that holds even when his people break covenant. The strongest OT word for love, characterized by faithfulness." },
+      { original: "תָמְנוּ (tamnu)", translit: "consumed", meaning: "To be finished, ended, brought to nothing. Jeremiah is saying: by all rights, we should have been wiped out. The fact that we aren't is mercy." },
+      { original: "רַחֲמָיו (rachamav)", translit: "compassions", meaning: "From rechem (womb). Visceral, motherly compassion. Not just emotional sympathy — gut-level mercy." },
+      { original: "אֱמוּנָה (emunah)", translit: "faithfulness", meaning: "Firmness, steadiness, reliability. The same root from which we get 'amen.' God's faithfulness is firm — you can put your weight on it." }
+    ],
+    breakdown: [
+      { title: "It is of the LORD's mercies", content: "The credit for survival goes to him. They aren't strong; he is merciful. The premise of all gratitude." },
+      { title: "That we are not consumed", content: "Jeremiah doesn't pretend it's been easy. The acknowledgment: we should have been destroyed. The mercy is what kept us alive." },
+      { title: "Because his compassions fail not", content: "His mercies don't run out. There is no end to the supply. When yours runs out, his still flows." },
+      { title: "They are new every morning", content: "Daily renewed. The mercy that was sufficient yesterday isn't yesterday's leftovers — fresh mercy meets you each morning. New supply for the new day." },
+      { title: "Great is thy faithfulness", content: "Direct address — the lament becomes worship. From describing God to declaring to him. Great — the word is large, weighty, full. His faithfulness is enormous." }
+    ],
+    crossRefs: [
+      { ref: "Lamentations 3:19-21", note: "The setup — Jeremiah recalls his affliction and 'this I recall to mind, therefore have I hope.' The turn happens by remembering." },
+      { ref: "Psalm 30:5", note: "Weeping may endure for a night, but joy cometh in the morning. Same daily renewal." },
+      { ref: "Psalm 103:8-14", note: "The LORD is merciful and gracious, slow to anger, plenteous in mercy. The fuller portrait." },
+      { ref: "Numbers 23:19", note: "God is not a man, that he should lie. His faithfulness is fixed in his nature." },
+      { ref: "1 Corinthians 1:9", note: "God is faithful, by whom ye were called. NT echo." }
+    ],
+    application: "If Jeremiah could write these verses from the rubble of Jerusalem, you can read them in your situation. The verse doesn't deny pain — it sets pain next to mercy. Each morning is a fresh delivery. Don't try to draw on yesterday's grace for today's trouble. Receive today's. The mercies are new. Great is his faithfulness — past, present, tomorrow morning."
+  }
+};
+
+// ============================================================
+// SYNONYM MAPPING — match user input to library entries
+// ============================================================
+const SYNONYMS = {
+  anxious: ['anxious', 'anxiety', 'worried', 'worry', 'worrying', 'nervous', 'panicked', 'panic', 'stressed', 'stress', 'tense', 'on edge', 'uneasy'],
+  tired: ['tired', 'exhausted', 'weary', 'drained', 'fatigued', 'spent', 'depleted', 'worn out', 'worn'],
+  angry: ['angry', 'mad', 'furious', 'rage', 'pissed', 'irritated', 'annoyed', 'frustrated', 'livid', 'enraged'],
+  lost: ['lost', 'confused', 'aimless', 'directionless', 'stuck', 'unsure', 'uncertain', 'wandering'],
+  lonely: ['lonely', 'alone', 'isolated', 'unseen', 'forgotten', 'invisible', 'abandoned', 'rejected'],
+  grateful: ['grateful', 'thankful', 'blessed', 'gratitude', 'appreciative'],
+  overwhelmed: ['overwhelmed', 'swamped', 'buried', 'drowning', 'too much', 'maxed out'],
+  afraid: ['afraid', 'fearful', 'fear', 'scared', 'terrified', 'frightened', 'fearing'],
+  doubting: ['doubting', 'doubt', 'doubtful', 'questioning', 'skeptical', 'unsure of god', 'unbelief', 'crisis of faith'],
+  grieving: ['grieving', 'grief', 'mourning', 'heartbroken', 'sorrow', 'sad', 'sadness', 'devastated', 'loss'],
+  tempted: ['tempted', 'temptation', 'pull', 'craving', 'lust'],
+  discouraged: ['discouraged', 'down', 'defeated', 'hopeless', 'deflated', 'low', 'depressed', 'depression', 'demoralized'],
+  guilty: ['guilty', 'guilt', 'ashamed', 'shame', 'remorse', 'remorseful', 'regret', 'regretful', 'condemned'],
+  bitter: ['bitter', 'resentful', 'resentment', 'unforgiving', 'holding grudge', 'spiteful'],
+  hopeful: ['hopeful', 'hope', 'optimistic', 'expectant', 'encouraged'],
+  numb: ['numb', 'empty', 'flat', 'nothing', 'detached', 'disconnected', 'apathetic', 'apathy', 'hollow'],
+  inadequate: ['inadequate', 'not enough', 'insufficient', 'unworthy', 'imposter', 'failure', 'failing', 'small'],
+  jealous: ['jealous', 'envious', 'envy', 'jealousy', 'comparing', 'comparison'],
+  restless: ['restless', 'unsettled', 'agitated', 'antsy', 'searching', 'longing'],
+  burned_out: ['burned out', 'burnout', 'fried', 'crispy', 'cooked', 'done', 'used up']
+};
+
+function findFeeling(input) {
+  const normalized = input.toLowerCase().trim();
+  // Direct match
+  if (LIBRARY[normalized]) return normalized;
+  // Synonym match — check exact synonyms first
+  for (const [key, synonyms] of Object.entries(SYNONYMS)) {
+    if (synonyms.includes(normalized)) return key;
+  }
+  // Partial / contains match
+  for (const [key, synonyms] of Object.entries(SYNONYMS)) {
+    for (const syn of synonyms) {
+      if (normalized.includes(syn) || syn.includes(normalized)) return key;
+    }
+  }
+  return 'default';
+}
+
+// ============================================================
+// STATE & STORAGE
+// ============================================================
+const STORAGE_KEY = 'anchor_v2';
+const state = {
+  history: [],
+  savedVerses: [],
+  planProgress: {}
+};
+
+function load() {
+  try {
+    const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || '{}');
+    Object.assign(state, saved);
+  } catch (e) { console.error('Load failed', e); }
+}
+
+function save() {
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+}
+
+// ============================================================
+// VERSE LOOKUP & STUDY RENDERING
+// ============================================================
+function normalizeVerseRef(input) {
+  // Normalize: lowercase, trim, collapse whitespace
+  let n = input.toLowerCase().trim().replace(/\s+/g, ' ');
+  // Remove common punctuation variations
+  n = n.replace(/[.]/g, '');
+  // Common abbreviations -> full names
+  const abbrevs = {
+    'jn': 'john', 'rom': 'romans', 'phil': 'philippians', 'eph': 'ephesians',
+    'matt': 'matthew', 'mt': 'matthew', 'mk': 'mark', 'lk': 'luke',
+    'cor': 'corinthians', '1 cor': '1 corinthians', '2 cor': '2 corinthians',
+    '1cor': '1 corinthians', '2cor': '2 corinthians',
+    'ps': 'psalm', 'psalms': 'psalm', 'prov': 'proverbs', 'pr': 'proverbs',
+    'isa': 'isaiah', 'jer': 'jeremiah', 'lam': 'lamentations',
+    'heb': 'hebrews', 'jas': 'james', 'rev': 'revelation',
+    'gen': 'genesis', 'ex': 'exodus', 'deut': 'deuteronomy', 'josh': 'joshua',
+    'col': 'colossians', '1 thess': '1 thessalonians', '2 thess': '2 thessalonians',
+    '1 pet': '1 peter', '2 pet': '2 peter', '1 jn': '1 john', '2 jn': '2 john', '3 jn': '3 john'
+  };
+  for (const [abbr, full] of Object.entries(abbrevs)) {
+    const re = new RegExp('\\b' + abbr.replace(/ /g, '\\s+') + '\\b', 'i');
+    if (re.test(n)) {
+      n = n.replace(re, full);
+      break;
+    }
+  }
+  return n.trim();
+}
+
+function findVerse(input) {
+  const normalized = normalizeVerseRef(input);
+  // Direct match
+  if (STUDY_LIBRARY[normalized]) return normalized;
+  // Match if user gave a range or single verse where we have multi-verse
+  // E.g., user types "ephesians 2:8-9" we have "ephesians 2:8"
+  // Or user types "philippians 4:13" and key is "philippians 4:13"
+  for (const key of Object.keys(STUDY_LIBRARY)) {
+    // Check if normalized starts with key or key starts with normalized
+    const keyBase = key.split('-')[0].trim();
+    const inputBase = normalized.split('-')[0].trim();
+    if (keyBase === inputBase) return key;
+    // Match book + chapter + first-verse
+    const keyMatch = key.match(/^(.+?\s\d+):(\d+)/);
+    const inputMatch = normalized.match(/^(.+?\s\d+):(\d+)/);
+    if (keyMatch && inputMatch && keyMatch[1] === inputMatch[1] && keyMatch[2] === inputMatch[2]) {
+      return key;
+    }
+  }
+  return null;
+}
+
+function generateStudy(input) {
+  const matched = findVerse(input);
+  const resultsEl = document.getElementById('studyResults');
+  resultsEl.classList.add('visible');
+
+  if (!matched) {
+    const available = Object.values(STUDY_LIBRARY).map(v => v.ref).sort();
+    resultsEl.innerHTML = `
+      <div class="not-found">
+        <h3>That passage isn't in the library yet</h3>
+        <p>Anchor includes deep theological breakdowns for the most-studied verses. Try one of these, or check your spelling:</p>
+        <div class="available-list">
+          ${available.map(r => `<div style="padding: 4px 0; cursor: pointer;" onclick="document.getElementById('verseInput').value='${r}'; document.getElementById('studyBtn').click();">${r}</div>`).join('')}
+        </div>
+        <p style="margin-top: 16px; font-size: 14px;">More passages can be added — let me know which ones you want next.</p>
+      </div>
+    `;
+    setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+    return;
+  }
+
+  const v = STUDY_LIBRARY[matched];
+
+  const wordsHTML = (v.words || []).map(w => `
+    <div class="word-entry">
+      <div class="original">${escapeHTML(w.original)}</div>
+      <div class="translit">${escapeHTML(w.translit)}</div>
+      <div class="meaning">${escapeHTML(w.meaning)}</div>
+    </div>
+  `).join('');
+
+  const breakdownHTML = (v.breakdown || []).map(b => `
+    <div style="padding: 18px 0; border-bottom: 1px dotted var(--rule);">
+      <div style="font-family: var(--display); font-style: italic; font-size: 19px; color: var(--accent-bright); margin-bottom: 8px;">${escapeHTML(b.title)}</div>
+      <div style="font-family: var(--display); font-size: 16px; line-height: 1.7; color: var(--text);">${escapeHTML(b.content)}</div>
+    </div>
+  `).join('');
+
+  const xrefsHTML = (v.crossRefs || []).map(x => `
+    <li>
+      <span class="ref">${escapeHTML(x.ref)}</span>
+      <span class="note">${escapeHTML(x.note)}</span>
+    </li>
+  `).join('');
+
+  resultsEl.innerHTML = `
+    <div class="verse-banner">
+      <div class="ref">${escapeHTML(v.ref)}</div>
+      <div class="text">"${escapeHTML(v.text)}"</div>
+      <div class="translation-tag">${escapeHTML(v.translation)}</div>
+    </div>
+
+    <div class="study-block feature">
+      <div class="block-label">Theme</div>
+      <div class="block-content">${escapeHTML(v.theme)}</div>
+    </div>
+
+    <div class="study-block">
+      <div class="block-label">Context</div>
+      <div class="block-content">${escapeHTML(v.context)}</div>
+    </div>
+
+    ${wordsHTML ? `
+    <div class="study-block">
+      <div class="block-label">Original Language</div>
+      <div style="margin-top: 12px;">${wordsHTML}</div>
+    </div>
+    ` : ''}
+
+    ${breakdownHTML ? `
+    <div class="study-block">
+      <div class="block-label">Verse-by-Verse</div>
+      <div>${breakdownHTML}</div>
+    </div>
+    ` : ''}
+
+    ${xrefsHTML ? `
+    <div class="study-block">
+      <div class="block-label">Cross-References</div>
+      <ul class="xref-list">${xrefsHTML}</ul>
+    </div>
+    ` : ''}
+
+    <div class="study-block warm">
+      <div class="block-label">Application</div>
+      <div class="block-content">${escapeHTML(v.application)}</div>
+    </div>
+
+    <div class="save-bar">
+      <button id="copyStudyBtn">Copy Study</button>
+      <button id="newStudyBtn">Study Another</button>
+    </div>
+  `;
+
+  document.getElementById('copyStudyBtn').addEventListener('click', () => {
+    const text = formatStudyAsText(v);
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('copyStudyBtn').textContent = 'Copied ✓';
+      setTimeout(() => { document.getElementById('copyStudyBtn').textContent = 'Copy Study'; }, 2000);
+    });
+  });
+
+  document.getElementById('newStudyBtn').addEventListener('click', () => {
+    document.getElementById('verseInput').value = '';
+    document.getElementById('verseInput').focus();
+    resultsEl.classList.remove('visible');
+    resultsEl.innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  setTimeout(() => resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' }), 100);
+}
+
+function formatStudyAsText(v) {
+  let out = `${v.ref.toUpperCase()} (${v.translation})\n\n"${v.text}"\n\n`;
+  out += `THEME\n${v.theme}\n\n`;
+  out += `CONTEXT\n${v.context}\n\n`;
+  if (v.words && v.words.length) {
+    out += `ORIGINAL LANGUAGE\n`;
+    v.words.forEach(w => { out += `\n${w.original} (${w.translit})\n${w.meaning}\n`; });
+    out += '\n';
+  }
+  if (v.breakdown && v.breakdown.length) {
+    out += `VERSE-BY-VERSE\n`;
+    v.breakdown.forEach(b => { out += `\n${b.title}\n${b.content}\n`; });
+    out += '\n';
+  }
+  if (v.crossRefs && v.crossRefs.length) {
+    out += `CROSS-REFERENCES\n`;
+    v.crossRefs.forEach(x => { out += `\n${x.ref} — ${x.note}`; });
+    out += '\n\n';
+  }
+  out += `APPLICATION\n${v.application}\n`;
+  return out;
+}
+
+function renderVerseGrid() {
+  const grid = document.getElementById('verseGrid');
+  const refs = Object.values(STUDY_LIBRARY).map(v => v.ref).sort();
+  grid.innerHTML = refs.map(r => `<button class="browse-chip" data-verse="${r}">${r}</button>`).join('');
+  grid.querySelectorAll('.browse-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.getElementById('verseInput').value = chip.dataset.verse;
+      generateStudy(chip.dataset.verse);
+    });
+  });
+}
+
+function handleVerseSubmit() {
+  const input = document.getElementById('verseInput').value.trim();
+  if (!input) {
+    document.getElementById('verseInput').focus();
+    return;
+  }
+  generateStudy(input);
+}
+
+// ============================================================
+// QUICK FEELINGS
+// ============================================================
+const QUICK_FEELINGS = ['anxious', 'tired', 'angry', 'overwhelmed', 'discouraged', 'lonely', 'grateful', 'afraid'];
+
+function renderQuickFeelings() {
+  const grid = document.getElementById('quickGrid');
+  grid.innerHTML = QUICK_FEELINGS.map(f => `<button class="quick-chip" data-feeling="${f}">${f}</button>`).join('');
+  grid.querySelectorAll('.quick-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.getElementById('feelingInput').value = chip.dataset.feeling;
+      handleSubmit();
+    });
+  });
+}
+
+function renderBrowse() {
+  const grid = document.getElementById('browseGrid');
+  const all = Object.keys(LIBRARY).filter(k => k !== 'default').sort();
+  grid.innerHTML = all.map(f => `<button class="browse-chip" data-feeling="${f}">${f.replace(/_/g, ' ')}</button>`).join('');
+  grid.querySelectorAll('.browse-chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelector('[data-tab=home]').click();
+      document.getElementById('feelingInput').value = chip.dataset.feeling.replace(/ /g, '_');
+      handleSubmit();
+    });
+  });
+}
+
+// ============================================================
+// GENERATE FOR FEELING
+// ============================================================
+function generateForFeeling(feeling) {
+  const matched = findFeeling(feeling);
+  const data = LIBRARY[matched];
+
+  const entry = {
+    id: Date.now().toString(),
+    feeling: feeling.replace(/_/g, ' '),
+    matchedKey: matched,
+    date: new Date().toISOString(),
+    acknowledge: data.acknowledge,
+    verses: data.verses,
+    plan: data.plan,
+    prayer: data.prayer
+  };
+
+  // Don't double-save if same feeling on same day
+  const today = new Date().toDateString();
+  const existing = state.history.find(h => h.matchedKey === matched && new Date(h.date).toDateString() === today);
+  if (!existing) {
+    state.history.unshift(entry);
+    save();
+  } else {
+    // Use existing so plan progress persists
+    entry.id = existing.id;
+  }
+
+  renderResults(entry);
+  renderHistory();
+}
+
+function renderResults(entry) {
+  const resultsEl = document.getElementById('resultsSection');
+  resultsEl.classList.add('visible');
+  const progress = state.planProgress[entry.id] || {};
+
+  const versesHTML = entry.verses.map((v, i) => {
+    const alreadySaved = state.savedVerses.find(s => s.ref === v.ref);
+    return `
+    <div class="verse-card">
+      <div class="ref">${escapeHTML(v.ref)}</div>
+      <div class="text">"${escapeHTML(v.text)}"</div>
+      <div class="why">${escapeHTML(v.why || '')}</div>
+      <button class="save-verse-btn ${alreadySaved ? 'saved' : ''}" data-entry="${entry.id}" data-idx="${i}">
+        ${alreadySaved ? 'Saved ✓' : 'Save Verse'}
+      </button>
+    </div>
+    `;
+  }).join('');
+
+  const planHTML = entry.plan.map((d, i) => `
+    <div class="plan-block">
+      <div class="day-num">Day ${i + 1}</div>
+      <div class="day-title">${escapeHTML(d.title || '')}</div>
+      <div class="day-section">
+        <div class="day-section-label">Read</div>
+        <div class="day-section-content"><em>${escapeHTML(d.passage || '')}</em></div>
+      </div>
+      <div class="day-section">
+        <div class="day-section-label">Focus</div>
+        <div class="day-section-content">${escapeHTML(d.focus || '')}</div>
+      </div>
+      <div class="day-section">
+        <div class="day-section-label">Practice</div>
+        <div class="day-section-content">${escapeHTML(d.practice || '')}</div>
+      </div>
+      <div class="check-day">
+        <input type="checkbox" id="check-${entry.id}-${i}" data-entry="${entry.id}" data-day="${i}" ${progress[i] ? 'checked' : ''} />
+        <label for="check-${entry.id}-${i}">Mark day ${i + 1} done</label>
+      </div>
+    </div>
+  `).join('');
+
+  resultsEl.innerHTML = `
+    <div class="feeling-echo">
+      <div class="label">You said</div>
+      <div class="word">${escapeHTML(entry.feeling)}</div>
+      <div class="acknowledge">${escapeHTML(entry.acknowledge)}</div>
+    </div>
+
+    <div class="verses-section">
+      <div class="section-heading">Scripture for this</div>
+      ${versesHTML}
+    </div>
+
+    <div class="verses-section">
+      <div class="section-heading">${entry.plan.length}-day path through it</div>
+      ${planHTML}
+    </div>
+
+    <div class="prayer-prompt">
+      <div class="label">A prayer to begin</div>
+      <div class="text">${escapeHTML(entry.prayer)}</div>
+    </div>
+
+    <div class="save-bar">
+      <button id="copyAllBtn">Copy All</button>
+      <button id="newOneBtn">Start Over</button>
+    </div>
+  `;
+
+  resultsEl.querySelectorAll('.save-verse-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const entryId = btn.dataset.entry;
+      const idx = parseInt(btn.dataset.idx);
+      const e = state.history.find(x => x.id === entryId) || entry;
+      const v = e.verses[idx];
+      if (!state.savedVerses.find(s => s.ref === v.ref)) {
+        state.savedVerses.unshift({
+          ref: v.ref,
+          text: v.text,
+          why: v.why,
+          fromFeeling: e.feeling,
+          date: new Date().toISOString()
+        });
+        save();
+        btn.textContent = 'Saved ✓';
+        btn.classList.add('saved');
+        renderSaved();
+      }
+    });
+  });
+
+  resultsEl.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+    cb.addEventListener('change', () => {
+      const entryId = cb.dataset.entry;
+      const day = cb.dataset.day;
+      if (!state.planProgress[entryId]) state.planProgress[entryId] = {};
+      state.planProgress[entryId][day] = cb.checked;
+      save();
+      renderHistory();
+    });
+  });
+
+  document.getElementById('copyAllBtn').addEventListener('click', () => {
+    const text = formatEntryAsText(entry);
+    navigator.clipboard.writeText(text).then(() => {
+      document.getElementById('copyAllBtn').textContent = 'Copied ✓';
+      setTimeout(() => { document.getElementById('copyAllBtn').textContent = 'Copy All'; }, 2000);
+    });
+  });
+
+  document.getElementById('newOneBtn').addEventListener('click', () => {
+    document.getElementById('feelingInput').value = '';
+    document.getElementById('feelingInput').focus();
+    resultsEl.classList.remove('visible');
+    resultsEl.innerHTML = '';
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  setTimeout(() => {
+    resultsEl.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, 100);
+}
+
+function formatEntryAsText(entry) {
+  let out = `ANCHOR — ${entry.feeling.toUpperCase()}\n${new Date(entry.date).toLocaleDateString()}\n\n`;
+  out += `${entry.acknowledge}\n\n--- VERSES ---\n\n`;
+  entry.verses.forEach(v => { out += `${v.ref}\n"${v.text}"\n${v.why || ''}\n\n`; });
+  out += `--- PATH (${entry.plan.length} days) ---\n\n`;
+  entry.plan.forEach((d, i) => {
+    out += `Day ${i + 1}: ${d.title}\nRead: ${d.passage}\nFocus: ${d.focus}\nPractice: ${d.practice}\n\n`;
+  });
+  out += `--- PRAYER ---\n\n${entry.prayer}\n`;
+  return out;
+}
+
+function escapeHTML(s) {
+  if (!s) return '';
+  return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+function renderHistory() {
+  const list = document.getElementById('historyList');
+  if (state.history.length === 0) {
+    list.innerHTML = '<div class="empty-state">No entries yet. Tell Anchor how you\'re feeling on the Now tab.</div>';
+    return;
+  }
+  list.innerHTML = state.history.map(e => {
+    const progress = state.planProgress[e.id] || {};
+    const completed = Object.values(progress).filter(Boolean).length;
+    const total = (e.plan || []).length;
+    return `
+      <div class="history-item" data-id="${e.id}">
+        <div>
+          <div class="word">${escapeHTML(e.feeling)}</div>
+          <div class="meta">${new Date(e.date).toLocaleDateString()} · Plan: ${completed}/${total} days</div>
+        </div>
+        <button class="delete" data-id="${e.id}">Delete</button>
+      </div>
+    `;
+  }).join('');
+
+  list.querySelectorAll('.history-item').forEach(item => {
+    item.addEventListener('click', e => {
+      if (e.target.classList.contains('delete')) return;
+      const id = item.dataset.id;
+      const entry = state.history.find(x => x.id === id);
+      if (entry) {
+        document.querySelector('[data-tab=home]').click();
+        renderResults(entry);
+      }
+    });
+  });
+
+  list.querySelectorAll('.delete').forEach(btn => {
+    btn.addEventListener('click', e => {
+      e.stopPropagation();
+      const id = btn.dataset.id;
+      if (confirm('Delete this entry?')) {
+        state.history = state.history.filter(x => x.id !== id);
+        delete state.planProgress[id];
+        save();
+        renderHistory();
+      }
+    });
+  });
+}
+
+function renderSaved() {
+  const list = document.getElementById('savedList');
+  if (state.savedVerses.length === 0) {
+    list.innerHTML = '<div class="empty-state">No saved verses yet. Save any verse from your generated results.</div>';
+    return;
+  }
+  list.innerHTML = state.savedVerses.map((v, i) => `
+    <div class="saved-verse">
+      <div class="ref">${escapeHTML(v.ref)}</div>
+      <div class="text">"${escapeHTML(v.text)}"</div>
+      ${v.why ? `<div style="font-family:var(--display);font-style:italic;font-size:14px;color:var(--text-soft);margin-bottom:8px;">${escapeHTML(v.why)}</div>` : ''}
+      <div class="meta">
+        <span>From "${escapeHTML(v.fromFeeling)}" · ${new Date(v.date).toLocaleDateString()}</span>
+        <button class="delete" data-idx="${i}" style="background:none;border:none;color:var(--text-faint);cursor:pointer;font-family:var(--ui);font-size:10px;text-transform:uppercase;letter-spacing:0.2em;">Remove</button>
+      </div>
+    </div>
+  `).join('');
+
+  list.querySelectorAll('.delete').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const idx = parseInt(btn.dataset.idx);
+      state.savedVerses.splice(idx, 1);
+      save();
+      renderSaved();
+    });
+  });
+}
+
+function setupTabs() {
+  document.querySelectorAll('.tab').forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+      document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+      tab.classList.add('active');
+      document.getElementById('panel-' + tab.dataset.tab).classList.add('active');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+}
+
+function handleSubmit() {
+  const feeling = document.getElementById('feelingInput').value.trim();
+  if (!feeling) {
+    document.getElementById('feelingInput').focus();
+    return;
+  }
+  generateForFeeling(feeling.toLowerCase());
+}
+
+function init() {
+  load();
+  setupTabs();
+  renderQuickFeelings();
+  renderBrowse();
+  renderVerseGrid();
+  renderHistory();
+  renderSaved();
+
+  document.getElementById('submitBtn').addEventListener('click', handleSubmit);
+  document.getElementById('feelingInput').addEventListener('keypress', e => {
+    if (e.key === 'Enter') handleSubmit();
+  });
+
+  document.getElementById('studyBtn').addEventListener('click', handleVerseSubmit);
+  document.getElementById('verseInput').addEventListener('keypress', e => {
+    if (e.key === 'Enter') handleVerseSubmit();
+  });
+
+  document.getElementById('feelingInput').focus();
+}
+
+document.addEventListener('DOMContentLoaded', init);
+</script>
+</body>
+</html>
