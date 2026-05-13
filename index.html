@@ -2793,3 +2793,576 @@ document.addEventListener('DOMContentLoaded', init);
 </script>
 </body>
 </html>
+<!--
+  ╔══════════════════════════════════════════════════════════════════╗
+  ║  ANCHOR — DEVOTIONAL TAB  (drop-in for index.html)              ║
+  ║                                                                  ║
+  ║  STEP 1 ─ Add the nav button                                     ║
+  ║    Find your existing nav tab buttons (Now, Browse, Study…)      ║
+  ║    and paste the button below alongside them:                    ║
+  ║                                                                  ║
+  ║  <button class="tab-btn" data-tab="devotional">Devotional</button>
+  ║                                                                  ║
+  ║  STEP 2 ─ Add the panel                                          ║
+  ║    Paste the entire <section id="devotional"> block below        ║
+  ║    alongside your other tab panels (Now, Browse, etc.)           ║
+  ║                                                                  ║
+  ║  STEP 3 ─ Add the styles                                         ║
+  ║    Paste the <style> block into your existing <style> tag        ║
+  ║    (or add it just before </style>)                              ║
+  ║                                                                  ║
+  ║  STEP 4 ─ Add the script                                         ║
+  ║    Paste the <script> block at the bottom of your existing       ║
+  ║    <script> section, before the closing </script> tag            ║
+  ╚══════════════════════════════════════════════════════════════════╝
+-->
+
+
+<!-- ═══════════════════════════════════════════════════
+     STEP 2 — PANEL  (paste with your other tab panels)
+     ═══════════════════════════════════════════════════ -->
+
+<section id="devotional" class="tab-panel" style="display:none;">
+
+  <div class="dev-header">
+    <div class="dev-toggle">
+      <button class="dev-mode-btn active" id="btn-morning" onclick="setDevMode('morning')">
+        ☀ Morning
+      </button>
+      <button class="dev-mode-btn" id="btn-nightly" onclick="setDevMode('nightly')">
+        ☽ Nightly
+      </button>
+    </div>
+    <p class="dev-subtitle" id="dev-subtitle">A moment before the day begins</p>
+  </div>
+
+  <!-- Day selector -->
+  <div class="dev-day-nav">
+    <button class="dev-day-arrow" onclick="shiftDevDay(-1)">&#8592;</button>
+    <span class="dev-day-label" id="dev-day-label">Day 1</span>
+    <button class="dev-day-arrow" onclick="shiftDevDay(1)">&#8594;</button>
+  </div>
+
+  <!-- Card -->
+  <div class="dev-card" id="dev-card">
+
+    <div class="dev-card-inner">
+
+      <!-- Scripture block -->
+      <div class="dev-scripture-block">
+        <span class="dev-open-quote">&#10077;</span>
+        <p class="dev-scripture-text" id="dev-scripture"></p>
+        <span class="dev-close-quote">&#10078;</span>
+        <p class="dev-reference" id="dev-reference"></p>
+      </div>
+
+      <!-- Divider -->
+      <div class="dev-divider">
+        <span class="dev-divider-mark">✦</span>
+      </div>
+
+      <!-- Title -->
+      <h2 class="dev-title" id="dev-title"></h2>
+
+      <!-- Reflection -->
+      <div class="dev-section">
+        <p class="dev-section-label">Reflection</p>
+        <p class="dev-body" id="dev-reflection"></p>
+      </div>
+
+      <!-- Prayer -->
+      <div class="dev-section">
+        <p class="dev-section-label">Prayer</p>
+        <p class="dev-body dev-prayer" id="dev-prayer"></p>
+      </div>
+
+      <!-- Mark complete -->
+      <button class="dev-complete-btn" id="dev-complete-btn" onclick="toggleDevComplete()">
+        Mark as Complete
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Progress dots -->
+  <div class="dev-dots" id="dev-dots"></div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════════════
+     STEP 3 — STYLES  (paste inside your <style> tag)
+     ═══════════════════════════════════════════════════ -->
+<style>
+
+/* ── Devotional tab ─────────────────────────────────────── */
+
+.dev-header {
+  text-align: center;
+  margin-bottom: 1.4rem;
+}
+
+.dev-toggle {
+  display: inline-flex;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 999px;
+  padding: 3px;
+  gap: 2px;
+  margin-bottom: 0.75rem;
+}
+
+.dev-mode-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255,255,255,0.45);
+  font-family: inherit;
+  font-size: 0.8rem;
+  letter-spacing: 0.08em;
+  padding: 0.4rem 1.1rem;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s;
+}
+
+.dev-mode-btn.active {
+  background: rgba(255,255,255,0.13);
+  color: #f0d78a;
+}
+
+.dev-subtitle {
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.38);
+  letter-spacing: 0.06em;
+  margin: 0;
+  font-style: italic;
+}
+
+/* Day nav */
+.dev-day-nav {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.2rem;
+  margin-bottom: 1.4rem;
+}
+
+.dev-day-arrow {
+  background: none;
+  border: 1px solid rgba(255,255,255,0.15);
+  color: rgba(255,255,255,0.5);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: border-color 0.2s, color 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.dev-day-arrow:hover {
+  border-color: #f0d78a;
+  color: #f0d78a;
+}
+
+.dev-day-label {
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  color: rgba(255,255,255,0.45);
+  text-transform: uppercase;
+  min-width: 48px;
+  text-align: center;
+}
+
+/* Card */
+.dev-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 2rem 1.6rem;
+  margin-bottom: 1.4rem;
+  transition: opacity 0.25s ease;
+}
+
+.dev-card.fading {
+  opacity: 0;
+}
+
+/* Scripture block */
+.dev-scripture-block {
+  text-align: center;
+  position: relative;
+  padding: 0.5rem 1rem 1.2rem;
+}
+
+.dev-open-quote,
+.dev-close-quote {
+  color: #f0d78a;
+  opacity: 0.35;
+  font-size: 1.6rem;
+  line-height: 1;
+  display: block;
+}
+
+.dev-open-quote { margin-bottom: 0.3rem; }
+.dev-close-quote { margin-top: 0.3rem; }
+
+.dev-scripture-text {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: rgba(255,255,255,0.88);
+  margin: 0 0 0.5rem;
+  font-style: italic;
+}
+
+.dev-reference {
+  font-size: 0.75rem;
+  letter-spacing: 0.1em;
+  color: #f0d78a;
+  opacity: 0.8;
+  margin: 0;
+  text-transform: uppercase;
+}
+
+/* Divider */
+.dev-divider {
+  text-align: center;
+  margin: 1.2rem 0;
+  position: relative;
+}
+
+.dev-divider::before,
+.dev-divider::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: calc(50% - 22px);
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+
+.dev-divider::before { left: 0; }
+.dev-divider::after  { right: 0; }
+
+.dev-divider-mark {
+  font-size: 0.65rem;
+  color: rgba(240,215,138,0.4);
+  position: relative;
+  z-index: 1;
+}
+
+/* Title */
+.dev-title {
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.15rem;
+  font-weight: normal;
+  color: rgba(255,255,255,0.92);
+  margin: 0 0 1.2rem;
+  text-align: center;
+  letter-spacing: 0.02em;
+}
+
+/* Sections */
+.dev-section {
+  margin-bottom: 1.2rem;
+}
+
+.dev-section-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #f0d78a;
+  opacity: 0.6;
+  margin: 0 0 0.45rem;
+}
+
+.dev-body {
+  font-size: 0.88rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.68);
+  margin: 0;
+}
+
+.dev-prayer {
+  font-style: italic;
+  color: rgba(255,255,255,0.58);
+  border-left: 2px solid rgba(240,215,138,0.2);
+  padding-left: 0.9rem;
+}
+
+/* Complete button */
+.dev-complete-btn {
+  display: block;
+  width: 100%;
+  margin-top: 1.4rem;
+  padding: 0.7rem;
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 8px;
+  color: rgba(255,255,255,0.4);
+  font-family: inherit;
+  font-size: 0.78rem;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.dev-complete-btn:hover {
+  border-color: rgba(240,215,138,0.4);
+  color: #f0d78a;
+}
+
+.dev-complete-btn.completed {
+  border-color: rgba(240,215,138,0.5);
+  color: #f0d78a;
+  background: rgba(240,215,138,0.06);
+}
+
+/* Progress dots */
+.dev-dots {
+  display: flex;
+  justify-content: center;
+  gap: 6px;
+  padding-bottom: 0.5rem;
+}
+
+.dev-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.dev-dot.active {
+  background: #f0d78a;
+}
+
+.dev-dot.done {
+  background: rgba(240,215,138,0.4);
+}
+
+</style>
+
+
+<!-- ═══════════════════════════════════════════════════
+     STEP 4 — SCRIPT  (paste inside your <script> tag)
+     ═══════════════════════════════════════════════════ -->
+<script>
+
+// ── Devotional Data ──────────────────────────────────────────────────────────
+
+const DEVOTIONALS = {
+  morning: [
+    {
+      title: "Begin in His Presence",
+      scripture: "This is the day that the LORD has made; let us rejoice and be glad in it.",
+      reference: "Psalm 118:24",
+      reflection: "Before the world presses in with its demands, pause. You were not made to rush into the day — you were made to receive it. The Lord has already gone before you into every hour that awaits. What is one thing you can surrender to Him before you begin?",
+      prayer: "Father, before anything else, I offer You this day. Still my mind, order my steps, and let my first thought be of You. I receive today as a gift. Amen."
+    },
+    {
+      title: "Renewed Every Morning",
+      scripture: "The steadfast love of the LORD never ceases; his mercies never come to an end; they are new every morning; great is your faithfulness.",
+      reference: "Lamentations 3:22–23",
+      reflection: "Yesterday's failures have no claim on this morning. His mercies reset — not because your record improved, but because His love never fluctuates. You are meeting a God who is not tired of you. Receive that freshness today.",
+      prayer: "Lord, thank You that I don't carry yesterday's weight into today. Your mercies are new, and so is my trust in You. Help me walk in that freedom. Amen."
+    },
+    {
+      title: "Strength for the Hours Ahead",
+      scripture: "But they who wait for the LORD shall renew their strength; they shall mount up with wings like eagles; they shall run and not be weary; they shall walk and not faint.",
+      reference: "Isaiah 40:31",
+      reflection: "Waiting is not passive — it is the act of turning your attention fully toward the One who holds all things. In stillness, strength is deposited. The eagle does not strain against the wind; it opens its wings and rises. Let today begin with that kind of rest.",
+      prayer: "God, I wait on You this morning. Fill what is empty, steady what is anxious, and carry what is heavy. I trust You with the hours ahead. Amen."
+    },
+    {
+      title: "His Word Lights the Path",
+      scripture: "Your word is a lamp to my feet and a light to my path.",
+      reference: "Psalm 119:105",
+      reflection: "A lamp gives enough light for the next step — not the whole road. God rarely shows the full picture ahead; He gives what you need for today. Trust the light you have. Step forward.",
+      prayer: "Lord, guide me today through Your Word. Where I'm uncertain, give me clarity. Where I'm afraid, give me courage. I walk by Your light. Amen."
+    },
+    {
+      title: "Chosen and Sent",
+      scripture: "You did not choose me, but I chose you and appointed you that you should go and bear fruit and that your fruit should abide.",
+      reference: "John 15:16",
+      reflection: "You did not stumble into faith — you were chosen before you understood what that meant. The work you do today, the faithfulness in small things, the love extended in hard moments — all of it is the fruit He appointed you to bear. Walk in that calling today.",
+      prayer: "Father, remind me today that I am Yours — chosen, sent, sustained. Let everything I do be rooted in that identity. Amen."
+    },
+    {
+      title: "Fixed Mind, Perfect Peace",
+      scripture: "You keep him in perfect peace whose mind is stayed on you, because he trusts in you.",
+      reference: "Isaiah 26:3",
+      reflection: "Peace is not the absence of difficulty — it is the presence of God in the middle of it. The key word is 'stayed': a deliberate, anchored focus on Him rather than on the noise around you. What would it mean for your mind to stay on Him today?",
+      prayer: "God, today I choose to fix my mind on You, not on what I can't control. Guard my thoughts. Keep me in Your peace. Amen."
+    },
+    {
+      title: "Ask, and It Will Be Given",
+      scripture: "Ask, and it will be given to you; seek, and you will find; knock, and it will be opened to you.",
+      reference: "Matthew 7:7",
+      reflection: "Prayer is not about convincing God — it is about coming to Him. The open hand matters more than the perfect words. Bring what you actually need today, not a cleaned-up version of it. He is not surprised by your requests.",
+      prayer: "Lord, I come to You honestly this morning. Here is what I need. Here is where I feel empty. I trust that You hear me and that You answer. Amen."
+    },
+  ],
+
+  nightly: [
+    {
+      title: "He Gives Sleep to His Beloved",
+      scripture: "In peace I will both lie down and sleep; for you alone, O LORD, make me dwell in safety.",
+      reference: "Psalm 4:8",
+      reflection: "The day is done. Whatever it held — victories or failures, moments of faith or moments of fear — you can set it down. God watches through the night. Your rest is an act of trust: you are saying that He doesn't need your vigilance to hold the world together.",
+      prayer: "Father, I release this day to You. Guard my sleep, quiet my thoughts, and let me rest in Your nearness. I trust You with tomorrow before it begins. Amen."
+    },
+    {
+      title: "He Who Keeps You Does Not Slumber",
+      scripture: "He who keeps Israel will neither slumber nor sleep. The LORD is your keeper.",
+      reference: "Psalm 121:4–5",
+      reflection: "You are permitted to sleep precisely because He is not. While you are still, He is active — working things together, ordering what you cannot see, keeping covenant with you. Lean into that reality tonight. The one on watch is faithful.",
+      prayer: "Lord, You are my keeper. I don't have to hold everything tonight — You are already holding it. Thank You for the gift of rest without fear. Amen."
+    },
+    {
+      title: "Examine and Rest",
+      scripture: "Search me, O God, and know my heart! Try me and know my thoughts! And see if there be any grievous way in me, and lead me in the way everlasting.",
+      reference: "Psalm 139:23–24",
+      reflection: "End of day is a good time for honest inventory — not condemnation, but openness. Where did grace show up today? Where did you miss it? Ask the Spirit to show you, receive what He reveals without shame, and close the night with a clean slate before Him.",
+      prayer: "Father, search me. Where I fell short today, forgive and restore me. Where I saw Your hand, help me to remember it. I close this day in Your mercy. Amen."
+    },
+    {
+      title: "Cast It All",
+      scripture: "Cast all your anxiety on him, because he cares for you.",
+      reference: "1 Peter 5:7",
+      reflection: "The worry that follows you into bed does not have to stay. He invites you to throw it — not hand it politely — onto Him. His care for you is not general or distant; it is specific and present. Name the thing you've been carrying today, and give it to Him now.",
+      prayer: "Lord, I cast this on You tonight: [name it honestly before Him]. I trust that You care and that You are working. I let go. Amen."
+    },
+    {
+      title: "Counted, Kept",
+      scripture: "You have kept count of my tossings; put my tears in your bottle. Are they not in your book?",
+      reference: "Psalm 56:8",
+      reflection: "God records your suffering. Not because He is a passive observer — but because He is a present witness to every hard night, every quiet grief, every unseen struggle. You were not alone today. You are not alone tonight.",
+      prayer: "Father, You have seen everything about this day. The things no one else knows — You know. Thank You for being near. Carry me through the night. Amen."
+    },
+    {
+      title: "The Peace That Guards",
+      scripture: "And the peace of God, which surpasses all understanding, will guard your hearts and your minds in Christ Jesus.",
+      reference: "Philippians 4:7",
+      reflection: "His peace does not make sense by the world's logic — it comes in the middle of hard circumstances, not after them. It is not the peace of resolution; it is the peace of trust. Let it stand guard over your heart tonight, keeping out what doesn't need to enter.",
+      prayer: "God, post Your peace at the door of my heart tonight. Whatever tries to disturb my rest, let Your presence be the answer. In Christ's name. Amen."
+    },
+    {
+      title: "Held Until Morning",
+      scripture: "The LORD will keep your going out and your coming in from this time forth and forevermore.",
+      reference: "Psalm 121:8",
+      reflection: "From the first moment of tomorrow to the last, He has already committed to keep you. Tonight is not a gap in His care — it is covered. Sleep as someone who is held.",
+      prayer: "Lord, I close this day knowing You hold me through the night and into tomorrow. I rest in that promise. Thank You. Amen."
+    },
+  ]
+};
+
+// ── State ────────────────────────────────────────────────────────────────────
+
+let devMode = (() => {
+  const h = new Date().getHours();
+  return (h >= 17 || h < 5) ? 'nightly' : 'morning';
+})();
+
+let devIndex = 0;
+
+function devStorageKey(mode, index) {
+  return `anchor_dev_complete_${mode}_${index}`;
+}
+
+function isDevComplete(mode, index) {
+  return localStorage.getItem(devStorageKey(mode, index)) === '1';
+}
+
+function setDevComplete(mode, index, val) {
+  if (val) {
+    localStorage.setItem(devStorageKey(mode, index), '1');
+  } else {
+    localStorage.removeItem(devStorageKey(mode, index));
+  }
+}
+
+// ── Render ───────────────────────────────────────────────────────────────────
+
+function renderDevotional() {
+  const list = DEVOTIONALS[devMode];
+  const d = list[devIndex];
+  const done = isDevComplete(devMode, devIndex);
+
+  document.getElementById('dev-scripture').textContent = d.scripture;
+  document.getElementById('dev-reference').textContent = d.reference;
+  document.getElementById('dev-title').textContent = d.title;
+  document.getElementById('dev-reflection').textContent = d.reflection;
+  document.getElementById('dev-prayer').textContent = d.prayer;
+
+  const btn = document.getElementById('dev-complete-btn');
+  btn.textContent = done ? '✓ Completed' : 'Mark as Complete';
+  btn.classList.toggle('completed', done);
+
+  document.getElementById('dev-day-label').textContent = `Day ${devIndex + 1}`;
+  document.getElementById('dev-subtitle').textContent =
+    devMode === 'morning' ? 'A moment before the day begins' : 'A moment before you rest';
+
+  // Dots
+  const dotsEl = document.getElementById('dev-dots');
+  dotsEl.innerHTML = '';
+  list.forEach((_, i) => {
+    const dot = document.createElement('span');
+    dot.className = 'dev-dot' +
+      (i === devIndex ? ' active' : '') +
+      (isDevComplete(devMode, i) ? ' done' : '');
+    dot.onclick = () => goToDevDay(i);
+    dotsEl.appendChild(dot);
+  });
+}
+
+function animateAndRender() {
+  const card = document.getElementById('dev-card');
+  card.classList.add('fading');
+  setTimeout(() => {
+    renderDevotional();
+    card.classList.remove('fading');
+  }, 220);
+}
+
+function setDevMode(mode) {
+  devMode = mode;
+  devIndex = 0;
+  document.getElementById('btn-morning').classList.toggle('active', mode === 'morning');
+  document.getElementById('btn-nightly').classList.toggle('active', mode === 'nightly');
+  animateAndRender();
+}
+
+function shiftDevDay(dir) {
+  const list = DEVOTIONALS[devMode];
+  devIndex = (devIndex + dir + list.length) % list.length;
+  animateAndRender();
+}
+
+function goToDevDay(i) {
+  devIndex = i;
+  animateAndRender();
+}
+
+function toggleDevComplete() {
+  const current = isDevComplete(devMode, devIndex);
+  setDevComplete(devMode, devIndex, !current);
+  renderDevotional();
+}
+
+// Init when tab is first shown — hook into however Anchor shows/hides tabs.
+// If your tab switching uses a function like showTab(name), call renderDevotional()
+// when 'devotional' is activated. As a safe fallback, this also runs on load:
+document.addEventListener('DOMContentLoaded', () => {
+  // Auto-set to correct time-of-day mode
+  const h = new Date().getHours();
+  const autoMode = (h >= 17 || h < 5) ? 'nightly' : 'morning';
+  setDevMode(autoMode);
+});
+
+</script>
