@@ -2162,7 +2162,7 @@ async function callClaudeAPI(prompt, systemPrompt) {
         'anthropic-dangerous-direct-browser-access': 'true'
       },
       body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
+        model: 'claude-sonnet-4-5-20250929',
         max_tokens: 4000,
         system: systemPrompt,
         messages: [{ role: 'user', content: prompt }]
@@ -2184,7 +2184,7 @@ async function generateStudyWithAI(input) {
   const resultsEl = document.getElementById('studyResults');
   resultsEl.innerHTML = `<div class="loading">Studying ${escapeHTML(input)} — pulling context, language, and theology</div>`;
 
-  const systemPrompt = `You are a careful biblical theologian providing deep verse studies. Be exegetically precise, historically grounded, and theologically substantive. Draw from the historic Christian tradition (church fathers, Reformers, modern evangelical scholarship). Avoid sentimentality. Return ONLY valid JSON, no preamble, no markdown fences.`;
+  const systemPrompt = `You are a thoughtful biblical scholar and theologian writing for an educational devotional study app called Anchor that helps Christians study Scripture in depth — exploring historical context, original languages, theological themes, and pastoral application. Write in the tradition of careful evangelical scholarship: exegetically precise, historically grounded, substantive. Respond only with valid JSON as requested, no preamble or code fences.`;
 
   const translation = state.translation || 'ESV';
 
