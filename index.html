@@ -2235,9 +2235,14 @@ Return ONLY the JSON object, no commentary, no code fences.`;
   try {
     let raw = result.text.trim();
     raw = raw.replace(/^```json\s*/i, '').replace(/^```\s*/, '').replace(/```\s*$/, '');
+    const firstBrace = raw.indexOf('{');
+    const lastBrace = raw.lastIndexOf('}');
+    if (firstBrace !== -1 && lastBrace !== -1 && lastBrace > firstBrace) {
+      raw = raw.substring(firstBrace, lastBrace + 1);
+    }
     data = JSON.parse(raw);
   } catch (e) {
-    resultsEl.innerHTML = `<div class="not-found"><h3>Couldn't parse the response</h3><p>The AI returned malformed data. Try again, or try a different reference format.</p></div>`;
+    resultsEl.innerHTML = `<div class="not-found"><h3>Couldn't parse the response</h3><p>The AI returned malformed data. Try again, or try a different reference format.</p><pre style="text-align:left;font-size:11px;color:var(--text-faint);margin-top:12px;max-height:200px;overflow:auto;">${escapeHTML((result.text||'').slice(0,500))}</pre></div>`;
     console.error('Parse error', e, result.text);
     return;
   }
